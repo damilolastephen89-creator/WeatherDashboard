@@ -9,8 +9,13 @@ An interactive weather dashboard providing real-time forecasts, visualizations, 
 - Automated deployment pipeline (GitHub Actions → Netlify/Hostinger)
 - Organized documentation with diagrams
 
+## 🛠️ Workflow Diagram
 ![Workflow Diagram](docs/workflow.png)
+
+## 🚀 CI/CD Pipeline
 ![CI/CD Pipeline](docs/cicd.png)
+
+## 🔄 Data Flow
 ![Data Flow](docs/dataflow.png)
 
 ## ⚙️ Setup Instructions
@@ -27,9 +32,9 @@ An interactive weather dashboard providing real-time forecasts, visualizations, 
    npm install
    ```
 4. Run locally:
-      bash
+   ```bash
    npm start
-   
+   ```
 ## 📦 Deployment
 - CI/CD handled via **GitHub Actions**
 - Hosting on **Netlify/Hostinger**
@@ -41,6 +46,12 @@ This project is licensed under the MIT License.
 ## 👨‍💻 Author
 **Gbemiga Damilola Stephen**  
 Interactive weather solutions with modern web technologies.
+```
+### ✅ What This Gives You
+- Clear **project overview** at the top.  
+- Diagrams embedded in logical order: Workflow → CI/CD → Data Flow.  
+- Easy-to-follow **setup instructions** for developers.  
+- Professional **deployment and license sections**.  
 
 
 
