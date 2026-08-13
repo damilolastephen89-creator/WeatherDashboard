@@ -9,9 +9,9 @@ An interactive weather dashboard providing real-time forecasts, visualizations, 
 - Automated deployment pipeline (GitHub Actions → Netlify/Hostinger)
 - Organized documentation with diagrams
 
-![Workflow Diagram](docs/workflow.png.png)
-![CI/CD Pipeline](docs/cicd.png.png)
-![Data Flow](docs/dataflow.png.png)
+![Workflow Diagram](docs/workflow.png)
+![CI/CD Pipeline](docs/cicd.png)
+![Data Flow](docs/dataflow.png)
 
 ## ⚙️ Setup Instructions
 1. Clone the repository:
