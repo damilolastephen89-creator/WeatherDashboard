@@ -46,12 +46,6 @@ This project is licensed under the MIT License.
 ## 👨‍💻 Author
 **Gbemiga Damilola Stephen**  
 Interactive weather solutions with modern web technologies.
-```
-### ✅ What This Gives You
-- Clear **project overview** at the top.  
-- Diagrams embedded in logical order: Workflow → CI/CD → Data Flow.  
-- Easy-to-follow **setup instructions** for developers.  
-- Professional **deployment and license sections**.  
 
 
 
