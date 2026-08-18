@@ -1,1 +1,8 @@
+WeatherDashboard/
+  ├── public/
+  ├── src/
+  │   ├── App.js
+  │   ├── index.js
+  ├── package.json
+  ├── .gitignore
 
