@@ -87,3 +87,5 @@ document.getElementById("search-btn").addEventListener("click", () => {
 // Load history on page start
 renderSearchHistory();
 
+// Clear history button event
+document.getElementById("clear-history").addEventListener("click", clearHistory);
