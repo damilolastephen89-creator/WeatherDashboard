@@ -23,6 +23,10 @@
   <h2>Search History</h2>
   <ul id="search-history"></ul>
 
+<h2>Search History</h2>
+<ul id="search-history"></ul>
+<button id="clear-history">Clear History</button>
+
   <script src="script.js"></script>
 </body>
 </html>
