@@ -1,0 +1,15 @@
+.forecast-cards {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.forecast-card {
+  background: #111;
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  width: 120px;
+}
+
