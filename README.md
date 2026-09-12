@@ -1,45 +1,49 @@
 # 🌦️ WeatherDashboard
 
-An interactive weather dashboard providing real-time forecasts, visualizations, and deployment via CI/CD pipelines.
+![Empire Hustle WeatherDashboard Banner](banner.png)
+
+A simple and powerful weather application built with **HTML, CSS, and JavaScript**, using the **OpenWeather API**.  
+Part of the **Empire Hustle Network** 🚀
+
+---
 
 ## ✨ Features
-- Real-time weather data from OpenWeatherMap API
-- Interactive charts and visualizations
-- Responsive frontend built with React
-- Automated deployment pipeline (GitHub Actions → Netlify/Hostinger)
-- Organized documentation with diagrams
+- 🔍 Search for any city’s weather
+- 🌡️ Current weather details (temperature, humidity, wind speed)
+- 📅 5-Day forecast with daily cards
+- 🕒 Persistent search history (saved with localStorage)
+- ❌ Clear history button to reset searches
+- ⚠️ Error handling for invalid city names
 
-## 🛠️ Workflow Diagram
-![Workflow Diagram](docs/workflow.png)
+---
 
-## 🚀 CI/CD Pipeline
-![CI/CD Pipeline](docs/cicd.png)
+## 📸 Screenshots
+### Current Weather
+![Current Weather Screenshot](screenshot-current.png)
 
-## 🔄 Data Flow
-![Data Flow](docs/dataflow.png)
+### 5-Day Forecast
+![Forecast Screenshot](screenshot-forecast.png)
 
-## ⚙️ Setup Instructions
-1. Clone the repository:
+---
+
+## 🚀 Live Demo
+Deployed on **Netlify**: [WeatherDashboard Live](https://empirehustle.netlify.app)
+
+---
+
+## 🛠️ Tech Stack
+- HTML5
+- CSS3 (Responsive design)
+- JavaScript (ES6)
+- OpenWeather API
+
+---
+
+## 📂 Installation
+1. Clone the repo:
    ```bash
    git clone https://github.com/damilolastephen89-creator/WeatherDashboard.git
-   ```
-2. Navigate into the project folder:
-   ```bash
-   cd WeatherDashboard
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Run locally:
-   ```bash
-   npm start
-   ```
-## 📦 Deployment
-- CI/CD handled via **GitHub Actions**
-- Hosting on **Netlify/Hostinger**
-- Automatic build & deploy on commit to `main`
-
+   
 ## 📜 License
 This project is licensed under the MIT License.
 
@@ -47,5 +51,7 @@ This project is licensed under the MIT License.
 **Gbemiga Damilola Stephen**  
 Interactive weather solutions with modern web technologies.
 
-
+🌍 Empire Hustle Branding
+This project is part of the Empire Hustle Network.
+Stay Hustling. Stay Building. 💪👑
 
