@@ -1,1 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Search Section -->
+  <div class="search-container">
+    <input type="text" id="city-input" placeholder="Enter city name">
+    <button id="search-btn">Search</button>
+  </div>
+
+  <!-- Current Weather -->
+  <div id="current-weather"></div>
+
+  <!-- Forecast Section -->
+  <h2>5-Day Forecast</h2>
+  <div id="forecast" class="forecast-cards"></div>
+
+  <!-- Search History -->
+  <h2>Search History</h2>
+  <ul id="search-history"></ul>
+
+  <script src="script.js"></script>
+</body>
+</html>
 
