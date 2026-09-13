@@ -83,3 +83,19 @@
   font-weight: bold;
   margin-top: 10px;
 }
+
+#countdown {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+  color: #FFD700; /* gold */
+  text-shadow: 0 0 8px #FF0000, 0 0 12px #FFA500; /* glowing red/orange */
+  animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+  0% { text-shadow: 0 0 8px #FF0000, 0 0 12px #FFA500; }
+  50% { text-shadow: 0 0 15px #FFD700, 0 0 20px #FFA500; }
+  100% { text-shadow: 0 0 8px #FF0000, 0 0 12px #FFA500; }
+}
