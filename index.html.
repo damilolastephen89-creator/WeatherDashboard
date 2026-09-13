@@ -52,3 +52,10 @@
 </body>
 
 <audio id="refresh-sound" src="chime.mp3" preload="auto"></audio>
+
+<div id="settings">
+  <label>
+    <input type="checkbox" id="enable-feedback" checked>
+    🔔 Enable sound & vibration
+  </label>
+</div>
