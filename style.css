@@ -110,3 +110,16 @@
   50% { opacity: 0.3; }
   100% { opacity: 1; }
 }
+
+#settings {
+  text-align: center;
+  margin-top: 15px;
+  color: #FFD700;
+  font-weight: bold;
+}
+
+#settings input[type="checkbox"] {
+  accent-color: #FFD700; /* gold checkbox */
+  transform: scale(1.2);
+  margin-right: 8px;
+}
