@@ -89,3 +89,120 @@ renderSearchHistory();
 
 // Clear history button event
 document.getElementById("clear-history").addEventListener("click", clearHistory);
+
+// Fetch current weather by city
+function getWeatherByCity(city) {
+  const apiKey = "YOUR_API_KEY";
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  fetch(url).then(res => res.json()).then(data => displayCurrentWeather(data));
+}
+
+// Fetch forecast by city
+function getForecastByCity(city) {
+  const apiKey = "YOUR_API_KEY";
+  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+  fetch(url).then(res => res.json()).then(data => displayForecast(data));
+}
+
+// Fetch alerts
+function getWeatherAlerts(lat, lon) {
+  const apiKey = "YOUR_API_KEY";
+  const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  fetch(url).then(res => res.json()).then(data => {
+    if (data.alerts && data.alerts.length > 0) {
+      displayAlerts(data.alerts);
+    }
+  });
+}
+
+// Display alerts
+function displayAlerts(alerts) {
+  const alertContainer = document.getElementById("alerts");
+  alertContainer.innerHTML = "";
+  alerts.forEach(alert => {
+    const alertBox = document.createElement("div");
+    alertBox.classList.add("alert-box");
+    alertBox.innerHTML = `
+      <button class="close-btn">❌</button>
+      <h3>${alert.event}</h3>
+      <p><em>From:</em> ${new Date(alert.start * 1000).toLocaleString()}</p>
+      <p><em>Until:</em> ${new Date(alert.end * 1000).toLocaleString()}</p>
+      <p>${alert.description}</p>
+    `;
+    alertContainer.appendChild(alertBox);
+  });
+
+  // Attach close button logic
+  document.querySelectorAll('.close-btn').forEach(button => {
+    button.addEventListener('click', function() {
+      const alertBox = this.parentElement;
+      const alertTitle = alertBox.querySelector('h3').innerText;
+      alertBox.classList.add('fade-out');
+      setTimeout(() => { alertBox.style.display = 'none'; }, 500);
+
+      let dismissed = JSON.parse(localStorage.getItem('dismissedAlerts')) || [];
+      if (!dismissed.includes(alertTitle)) {
+        dismissed.push(alertTitle);
+        localStorage.setItem('dismissedAlerts', JSON.stringify(dismissed));
+      }
+    });
+  });
+}
+
+// Reset alerts
+document.getElementById('reset-alerts').addEventListener('click', function() {
+  localStorage.removeItem('dismissedAlerts');
+  document.querySelectorAll('.alert-box').forEach(alertBox => {
+    alertBox.style.display = 'block';
+    alertBox.classList.remove('fade-out');
+  });
+});
+
+// Countdown + auto-refresh
+let refreshInterval = 3600; // seconds
+let countdown = refreshInterval;
+
+function startCountdown() {
+  const timerDisplay = document.getElementById("countdown");
+  setInterval(() => {
+    countdown--;
+    let minutes = Math.floor(countdown / 60);
+    let seconds = countdown % 60;
+    timerDisplay.innerText = `Next refresh in ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    if (countdown <= 0) countdown = refreshInterval;
+  }, 1000);
+}
+
+function startAutoRefresh(lat, lon) {
+  getWeatherAlerts(lat, lon);
+  startCountdown();
+  setInterval(() => {
+    getWeatherAlerts(lat, lon);
+    countdown = refreshInterval;
+  }, refreshInterval * 1000);
+}
+
+// Geolocation init
+window.onload = function() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      getWeatherByCity("Lagos"); // fallback
+      getForecastByCity("Lagos");
+      startAutoRefresh(lat, lon);
+    }, () => {
+      getWeatherByCity("Lagos");
+      getForecastByCity("Lagos");
+    });
+  }
+};
+
+// Search form
+document.getElementById("search-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const city = document.getElementById("search-input").value;
+  getWeatherByCity(city);
+  getForecastByCity(city);
+});
+
