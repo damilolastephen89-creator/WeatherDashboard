@@ -206,3 +206,22 @@ document.getElementById("search-form").addEventListener("submit", function(e) {
   getForecastByCity(city);
 });
 
+function startAutoRefresh(lat, lon) {
+  getWeatherAlerts(lat, lon);
+  startCountdown();
+
+  setInterval(() => {
+    console.log("Refreshing alerts...");
+    getWeatherAlerts(lat, lon);
+    countdown = refreshInterval;
+
+    // Play sound
+    const sound = document.getElementById("refresh-sound");
+    if (sound) sound.play();
+
+    // Vibrate (mobile devices)
+    if (navigator.vibrate) {
+      navigator.vibrate([200, 100, 200]); // vibrate pattern
+    }
+  }, refreshInterval * 1000);
+}
