@@ -291,3 +291,23 @@
 .tab-content.active {
   display: block;
 }
+
+.tab-btn {
+  background: #000000;
+  border: 2px solid #FFD700;
+  color: #FFD700;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.tab-btn.active {
+  background: #FFD700;
+  color: #000000;
+}
+
+.tab-btn:hover {
+  box-shadow: 0 0 10px #FFD700;
+}
