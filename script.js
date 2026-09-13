@@ -229,3 +229,32 @@ function startAutoRefresh(lat, lon) {
 timerDisplay.classList.add("flash");
 setTimeout(() => timerDisplay.classList.remove("flash"), 1000);
 
+function startAutoRefresh(lat, lon) {
+  getWeatherAlerts(lat, lon);
+  startCountdown();
+
+  setInterval(() => {
+    console.log("Refreshing alerts...");
+    getWeatherAlerts(lat, lon);
+    countdown = refreshInterval;
+
+    // Check if feedback is enabled
+    const feedbackEnabled = document.getElementById("enable-feedback").checked;
+
+    if (feedbackEnabled) {
+      // Play sound
+      const sound = document.getElementById("refresh-sound");
+      if (sound) sound.play();
+
+      // Vibrate (mobile devices)
+      if (navigator.vibrate) {
+        navigator.vibrate([200, 100, 200]);
+      }
+
+      // Flash effect
+      const timerDisplay = document.getElementById("countdown");
+      timerDisplay.classList.add("flash");
+      setTimeout(() => timerDisplay.classList.remove("flash"), 1000);
+    }
+  }, refreshInterval * 1000);
+}
