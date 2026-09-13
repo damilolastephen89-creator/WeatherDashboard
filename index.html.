@@ -59,3 +59,32 @@
     🔔 Enable sound & vibration
   </label>
 </div>
+
+<!-- Settings Button -->
+<button id="open-settings">⚙️ Settings</button>
+
+<!-- Settings Modal -->
+<div id="settings-modal" class="modal">
+  <div class="modal-content">
+    <span id="close-settings" class="close">&times;</span>
+    <h2>Empire Hustle Settings</h2>
+
+    <label>
+      <input type="checkbox" id="enable-feedback" checked>
+      🔔 Enable sound & vibration
+    </label><br><br>
+
+    <label>
+      Refresh interval (minutes):
+      <input type="number" id="refresh-interval" value="60" min="5" step="5">
+    </label><br><br>
+
+    <label>
+      Theme:
+      <select id="theme-select">
+        <option value="dark">🌑 Dark</option>
+        <option value="light">☀️ Light</option>
+      </select>
+    </label>
+  </div>
+</div>
