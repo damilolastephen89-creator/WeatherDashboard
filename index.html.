@@ -62,22 +62,36 @@
     <span id="close-settings" class="close">&times;</span>
     <h2>Empire Hustle Settings</h2>
 
-    <label>
-      <input type="checkbox" id="enable-feedback" checked>
-      🔔 Enable sound & vibration
-    </label><br><br>
+    <!-- Tab Navigation -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="general">General</button>
+      <button class="tab-btn" data-tab="alerts">Alerts</button>
+      <button class="tab-btn" data-tab="theme">Theme</button>
+    </div>
 
-    <label>
-      Refresh interval (minutes):
-      <input type="number" id="refresh-interval" value="60" min="5" step="5">
-    </label><br><br>
+    <!-- Tab Content -->
+    <div id="general" class="tab-content active">
+      <label>
+        Refresh interval (minutes):
+        <input type="number" id="refresh-interval" value="60" min="5" step="5">
+      </label>
+    </div>
 
-    <label>
-      Theme:
-      <select id="theme-select">
-        <option value="dark">🌑 Dark</option>
-        <option value="light">☀️ Light</option>
-      </select>
-    </label>
+    <div id="alerts" class="tab-content">
+      <label>
+        <input type="checkbox" id="enable-feedback" checked>
+        🔔 Enable sound & vibration
+      </label>
+    </div>
+
+    <div id="theme" class="tab-content">
+      <label>
+        Theme:
+        <select id="theme-select">
+          <option value="dark">🌑 Dark</option>
+          <option value="light">☀️ Light</option>
+        </select>
+      </label>
+    </div>
   </div>
 </div>
