@@ -50,3 +50,5 @@
 
   <script src="script.js"></script>
 </body>
+
+<audio id="refresh-sound" src="chime.mp3" preload="auto"></audio>
