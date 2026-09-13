@@ -386,3 +386,24 @@ window.onclick = (event) => {
     modal.classList.remove("show");
   }
 };
+
+const sidebar = document.getElementById("settings-sidebar");
+const openBtn = document.getElementById("open-settings");
+const closeBtn = document.getElementById("close-settings");
+
+// Open sidebar
+openBtn.onclick = () => {
+  sidebar.classList.add("show");
+};
+
+// Close sidebar
+closeBtn.onclick = () => {
+  sidebar.classList.remove("show");
+};
+
+// Close if clicking outside (optional)
+window.onclick = (event) => {
+  if (event.target == sidebar) {
+    sidebar.classList.remove("show");
+  }
+};
