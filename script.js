@@ -258,3 +258,57 @@ function startAutoRefresh(lat, lon) {
     }
   }, refreshInterval * 1000);
 }
+
+// Load saved preference on page load
+window.onload = function() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      getWeatherByCity("Lagos"); // fallback
+      getForecastByCity("Lagos");
+      startAutoRefresh(lat, lon);
+    }, () => {
+      getWeatherByCity("Lagos");
+      getForecastByCity("Lagos");
+    });
+  }
+
+  // Restore toggle state
+  const savedFeedback = localStorage.getItem("feedbackEnabled");
+  if (savedFeedback !== null) {
+    document.getElementById("enable-feedback").checked = (savedFeedback === "true");
+  }
+};
+
+// Save preference when user changes toggle
+document.getElementById("enable-feedback").addEventListener("change", function() {
+  localStorage.setItem("feedbackEnabled", this.checked);
+});
+
+// Auto-refresh logic (updated)
+function startAutoRefresh(lat, lon) {
+  getWeatherAlerts(lat, lon);
+  startCountdown();
+
+  setInterval(() => {
+    console.log("Refreshing alerts...");
+    getWeatherAlerts(lat, lon);
+    countdown = refreshInterval;
+
+    // Check saved preference
+    const feedbackEnabled = document.getElementById("enable-feedback").checked;
+    if (feedbackEnabled) {
+      const sound = document.getElementById("refresh-sound");
+      if (sound) sound.play();
+
+      if (navigator.vibrate) {
+        navigator.vibrate([200, 100, 200]);
+      }
+
+      const timerDisplay = document.getElementById("countdown");
+      timerDisplay.classList.add("flash");
+      setTimeout(() => timerDisplay.classList.remove("flash"), 1000);
+    }
+  }, refreshInterval * 1000);
+}
