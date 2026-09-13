@@ -312,3 +312,77 @@ function startAutoRefresh(lat, lon) {
     }
   }, refreshInterval * 1000);
 }
+
+// Modal open/close
+const modal = document.getElementById("settings-modal");
+const openBtn = document.getElementById("open-settings");
+const closeBtn = document.getElementById("close-settings");
+
+openBtn.onclick = () => modal.style.display = "block";
+closeBtn.onclick = () => modal.style.display = "none";
+window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; };
+
+// Save preferences
+document.getElementById("enable-feedback").addEventListener("change", function() {
+  localStorage.setItem("feedbackEnabled", this.checked);
+});
+
+document.getElementById("refresh-interval").addEventListener("change", function() {
+  localStorage.setItem("refreshInterval", this.value);
+});
+
+document.getElementById("theme-select").addEventListener("change", function() {
+  localStorage.setItem("theme", this.value);
+  applyTheme(this.value);
+});
+
+// Apply theme
+function applyTheme(theme) {
+  if (theme === "light") {
+    document.body.style.background = "#FFFFFF";
+    document.body.style.color = "#000000";
+  } else {
+    document.body.style.background = "#000000";
+    document.body.style.color = "#FFD700";
+  }
+}
+
+// Restore preferences on load
+window.onload = function() {
+  const savedFeedback = localStorage.getItem("feedbackEnabled");
+  if (savedFeedback !== null) {
+    document.getElementById("enable-feedback").checked = (savedFeedback === "true");
+  }
+
+  const savedInterval = localStorage.getItem("refreshInterval");
+  if (savedInterval) {
+    document.getElementById("refresh-interval").value = savedInterval;
+    refreshInterval = parseInt(savedInterval) * 60; // convert minutes to seconds
+  }
+
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    document.getElementById("theme-select").value = savedTheme;
+    applyTheme(savedTheme);
+  }
+};
+
+const modal = document.getElementById("settings-modal");
+const openBtn = document.getElementById("open-settings");
+const closeBtn = document.getElementById("close-settings");
+
+// Open with fade-in
+openBtn.onclick = () => {
+  modal.classList.add("show");
+};
+
+// Close with fade-out
+closeBtn.onclick = () => {
+  modal.classList.remove("show");
+};
+
+window.onclick = (event) => {
+  if (event.target == modal) {
+    modal.classList.remove("show");
+  }
+};
