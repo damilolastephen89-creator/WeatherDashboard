@@ -228,3 +228,4 @@ function startAutoRefresh(lat, lon) {
 
 timerDisplay.classList.add("flash");
 setTimeout(() => timerDisplay.classList.remove("flash"), 1000);
+
