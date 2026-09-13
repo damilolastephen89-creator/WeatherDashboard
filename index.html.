@@ -32,3 +32,21 @@
 </body>
 </html>
 
+<body>
+  <!-- Search Form -->
+  <form id="search-form">
+    <input type="text" id="search-input" placeholder="Enter city name">
+    <button type="submit">Search</button>
+  </form>
+
+  <!-- Weather Display -->
+  <div id="current-weather"></div>
+  <div id="forecast"></div>
+
+  <!-- Alerts Section -->
+  <div id="alerts"></div>
+  <button id="reset-alerts">🔄 Show All Alerts</button>
+  <p id="countdown"></p>
+
+  <script src="script.js"></script>
+</body>
