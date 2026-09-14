@@ -576,3 +576,48 @@ function applyTheme(theme) {
     document.body.classList.add("dark-theme");
   }
 }
+
+function generateStars(count = 50) {
+  // Remove old stars
+  document.querySelectorAll(".star").forEach(star => star.remove());
+
+  if (document.body.classList.contains("dark-theme")) {
+    for (let i = 0; i < count; i++) {
+      const star = document.createElement("div");
+      star.classList.add("star");
+      star.style.top = Math.random() * window.innerHeight + "px";
+      star.style.left = Math.random() * window.innerWidth + "px";
+      star.style.animationDuration = (1 + Math.random() * 2) + "s";
+      document.body.appendChild(star);
+    }
+  }
+}
+
+// Call stars whenever theme changes
+document.getElementById("theme-select").addEventListener("change", function() {
+  const selectedTheme = this.value;
+  localStorage.setItem("theme", selectedTheme);
+  applyTheme(selectedTheme);
+
+  // Animate icon
+  const themeIcon = document.getElementById("theme-icon");
+  themeIcon.textContent = selectedTheme === "dark" ? "🌑" : "☀️";
+  themeIcon.classList.add("animate");
+  setTimeout(() => themeIcon.classList.remove("animate"), 800);
+
+  // Show toast
+  showToast(selectedTheme === "dark" ? "🌑 Dark mode applied" : "☀️ Light mode applied", "info");
+
+  // Generate stars if dark mode
+  generateStars();
+});
+
+// Generate stars on load if dark mode
+window.onload = function() {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    applyTheme(savedTheme);
+    document.getElementById("theme-select").value = savedTheme;
+    generateStars();
+  }
+};
