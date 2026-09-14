@@ -548,3 +548,20 @@
 #theme-icon.animate {
   animation: rotateIcon 0.8s ease;
 }
+
+/* Default body style */
+body {
+  transition: background 1s ease, color 1s ease;
+}
+
+/* Dark theme gradient */
+body.dark-theme {
+  background: linear-gradient(135deg, #000000, #001f3f, #003366);
+  color: #FFD700;
+}
+
+/* Light theme gradient */
+body.light-theme {
+  background: linear-gradient(135deg, #FFFFFF, #FFD700, #FFA500);
+  color: #000000;
+}
