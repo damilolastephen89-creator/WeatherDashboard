@@ -494,3 +494,40 @@ document.getElementById("reset-settings").addEventListener("click", () => {
   // Show toast instead of alert
   showToast("✅ Settings reset to defaults!");
 });
+
+// Toast function with type
+function showToast(message, type = "info") {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+
+  // Reset classes
+  toast.className = "";
+  toast.classList.add("show", type);
+
+  // Hide after 3 seconds
+  setTimeout(() => {
+    toast.classList.remove("show", type);
+  }, 3000);
+}
+
+// Reset button logic
+document.getElementById("reset-settings").addEventListener("click", () => {
+  // Clear localStorage
+  localStorage.removeItem("feedbackEnabled");
+  localStorage.removeItem("refreshInterval");
+  localStorage.removeItem("theme");
+
+  // Restore defaults
+  document.getElementById("enable-feedback").checked = true;
+  document.getElementById("refresh-interval").value = 60;
+  refreshInterval = 60 * 60; // 60 minutes in seconds
+  document.getElementById("theme-select").value = "dark";
+  applyTheme("dark");
+
+  // Trigger sidebar animation
+  sidebar.classList.add("reset-animate");
+  setTimeout(() => sidebar.classList.remove("reset-animate"), 1200);
+
+  // Show success toast
+  showToast("✅ Settings reset to defaults!", "success");
+});
