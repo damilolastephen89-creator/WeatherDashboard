@@ -348,14 +348,15 @@ tabButtons.forEach(button => {
   });
 });
 
-// Apply theme
 function applyTheme(theme) {
   if (theme === "light") {
-    document.body.style.background = "#FFFFFF";
-    document.body.style.color = "#000000";
+    document.body.classList.remove("dark-theme");
+    document.body.classList.add("light-theme");
+    document.getElementById("horizon").style.opacity = "0.7"; // softer horizon in day
   } else {
-    document.body.style.background = "#000000";
-    document.body.style.color = "#FFD700";
+    document.body.classList.remove("light-theme");
+    document.body.classList.add("dark-theme");
+    document.getElementById("horizon").style.opacity = "1"; // stronger silhouette at night
   }
 }
 
