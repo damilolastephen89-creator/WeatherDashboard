@@ -621,3 +621,56 @@ window.onload = function() {
     generateStars();
   }
 };
+
+function generateClouds(count = 5) {
+  // Remove old clouds
+  document.querySelectorAll(".cloud").forEach(cloud => cloud.remove());
+
+  if (document.body.classList.contains("light-theme")) {
+    for (let i = 0; i < count; i++) {
+      const cloud = document.createElement("div");
+      cloud.classList.add("cloud");
+      cloud.style.top = Math.random() * (window.innerHeight / 2) + "px";
+      cloud.style.left = -150 + "px"; // start off-screen
+      cloud.style.animationDuration = (40 + Math.random() * 40) + "s";
+      document.body.appendChild(cloud);
+    }
+  }
+}
+
+// Call clouds whenever theme changes
+document.getElementById("theme-select").addEventListener("change", function() {
+  const selectedTheme = this.value;
+  localStorage.setItem("theme", selectedTheme);
+  applyTheme(selectedTheme);
+
+  // Animate icon
+  const themeIcon = document.getElementById("theme-icon");
+  themeIcon.textContent = selectedTheme === "dark" ? "🌑" : "☀️";
+  themeIcon.classList.add("animate");
+  setTimeout(() => themeIcon.classList.remove("animate"), 800);
+
+  // Show toast
+  showToast(selectedTheme === "dark" ? "🌑 Dark mode applied" : "☀️ Light mode applied", "info");
+
+  // Generate stars or clouds
+  if (selectedTheme === "dark") {
+    generateStars();
+  } else {
+    generateClouds();
+  }
+});
+
+// Generate clouds on load if light mode
+window.onload = function() {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    applyTheme(savedTheme);
+    document.getElementById("theme-select").value = savedTheme;
+    if (savedTheme === "dark") {
+      generateStars();
+    } else {
+      generateClouds();
+    }
+  }
+};
