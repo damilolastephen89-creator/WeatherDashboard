@@ -101,3 +101,5 @@
   <button class="tab-btn" data-tab="alerts">🔔 Alerts</button>
   <button class="tab-btn" data-tab="theme">🌑☀️ Theme</button>
 </div>
+
+<button id="reset-settings">♻️ Reset to Defaults</button>
