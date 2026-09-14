@@ -674,3 +674,35 @@ window.onload = function() {
     }
   }
 };
+
+document.getElementById("theme-select").addEventListener("change", function() {
+  const selectedTheme = this.value;
+  localStorage.setItem("theme", selectedTheme);
+
+  // Remove old animation classes
+  document.body.classList.remove("sunrise", "sunset");
+
+  if (selectedTheme === "dark") {
+    // Sunset transition
+    document.body.classList.add("sunset");
+    setTimeout(() => {
+      applyTheme("dark");
+      generateStars();
+    }, 2000);
+    showToast("🌑 Sunset into Dark mode", "info");
+  } else {
+    // Sunrise transition
+    document.body.classList.add("sunrise");
+    setTimeout(() => {
+      applyTheme("light");
+      generateClouds();
+    }, 2000);
+    showToast("☀️ Sunrise into Light mode", "info");
+  }
+
+  // Animate icon
+  const themeIcon = document.getElementById("theme-icon");
+  themeIcon.textContent = selectedTheme === "dark" ? "🌑" : "☀️";
+  themeIcon.classList.add("animate");
+  setTimeout(() => themeIcon.classList.remove("animate"), 800);
+});
