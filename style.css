@@ -402,3 +402,21 @@
 .sidebar.show {
   right: 0; /* slides in */
 }
+
+#reset-settings {
+  margin-top: 20px;
+  background: #FF0000;
+  border: 2px solid #FFD700;
+  color: #FFFFFF;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#reset-settings:hover {
+  background: #FFA500;
+  color: #000000;
+  box-shadow: 0 0 10px #FFD700;
+}
