@@ -409,3 +409,55 @@ document.getElementById("reset-settings").addEventListener("click", () => {
 
   alert("✅ Settings have been reset to defaults!");
 });
+
+document.getElementById("reset-settings").addEventListener("click", () => {
+  // Clear localStorage
+  localStorage.removeItem("feedbackEnabled");
+  localStorage.removeItem("refreshInterval");
+  localStorage.removeItem("theme");
+
+  // Restore defaults
+  document.getElementById("enable-feedback").checked = true;
+  document.getElementById("refresh-interval").value = 60;
+  refreshInterval = 60 * 60; // 60 minutes in seconds
+  document.getElementById("theme-select").value = "dark";
+  applyTheme("dark");
+
+  // Trigger sidebar animation
+  sidebar.classList.add("reset-animate");
+  setTimeout(() => sidebar.classList.remove("reset-animate"), 1200);
+
+  alert("✅ Settings have been reset to defaults!");
+});
+
+document.getElementById("reset-settings").addEventListener("click", () => {
+  // Clear localStorage
+  localStorage.removeItem("feedbackEnabled");
+  localStorage.removeItem("refreshInterval");
+  localStorage.removeItem("theme");
+
+  // Restore defaults
+  document.getElementById("enable-feedback").checked = true;
+  document.getElementById("refresh-interval").value = 60;
+  refreshInterval = 60 * 60; // 60 minutes in seconds
+  document.getElementById("theme-select").value = "dark";
+  applyTheme("dark");
+
+  // Trigger sidebar animation
+  sidebar.classList.add("reset-animate");
+  setTimeout(() => sidebar.classList.remove("reset-animate"), 1200);
+
+  // Show checkmark ✔️
+  const check = document.getElementById("reset-check");
+  check.textContent = "✔️";
+  check.classList.add("show");
+
+  // Hide checkmark after 2 seconds
+  setTimeout(() => {
+    check.classList.remove("show");
+    check.textContent = "";
+  }, 2000);
+
+  // Optional: keep alert for extra feedback
+  alert("✅ Settings have been reset to defaults!");
+});
