@@ -313,14 +313,51 @@ function startAutoRefresh(lat, lon) {
   }, refreshInterval * 1000);
 }
 
-// Modal open/close
-const modal = document.getElementById("settings-modal");
+// Sidebar open/close
+const sidebar = document.getElementById("settings-sidebar");
 const openBtn = document.getElementById("open-settings");
 const closeBtn = document.getElementById("close-settings");
 
-openBtn.onclick = () => modal.style.display = "block";
-closeBtn.onclick = () => modal.style.display = "none";
-window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; };
+openBtn.onclick = () => {
+  sidebar.classList.add("show");
+};
+
+closeBtn.onclick = () => {
+  sidebar.classList.remove("show");
+};
+
+window.onclick = (event) => {
+  if (event.target == sidebar) {
+    sidebar.classList.remove("show");
+  }
+};
+
+// Tab switching logic
+const tabButtons = document.querySelectorAll(".tab-btn");
+const tabContents = document.querySelectorAll(".tab-content");
+
+tabButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    // Remove active from all
+    tabButtons.forEach(btn => btn.classList.remove("active"));
+    tabContents.forEach(content => content.classList.remove("active"));
+
+    // Add active to clicked tab
+    button.classList.add("active");
+    document.getElementById(button.dataset.tab).classList.add("active");
+  });
+});
+
+// Apply theme
+function applyTheme(theme) {
+  if (theme === "light") {
+    document.body.style.background = "#FFFFFF";
+    document.body.style.color = "#000000";
+  } else {
+    document.body.style.background = "#000000";
+    document.body.style.color = "#FFD700";
+  }
+}
 
 // Save preferences
 document.getElementById("enable-feedback").addEventListener("change", function() {
@@ -335,17 +372,6 @@ document.getElementById("theme-select").addEventListener("change", function() {
   localStorage.setItem("theme", this.value);
   applyTheme(this.value);
 });
-
-// Apply theme
-function applyTheme(theme) {
-  if (theme === "light") {
-    document.body.style.background = "#FFFFFF";
-    document.body.style.color = "#000000";
-  } else {
-    document.body.style.background = "#000000";
-    document.body.style.color = "#FFD700";
-  }
-}
 
 // Restore preferences on load
 window.onload = function() {
@@ -367,59 +393,19 @@ window.onload = function() {
   }
 };
 
-const modal = document.getElementById("settings-modal");
-const openBtn = document.getElementById("open-settings");
-const closeBtn = document.getElementById("close-settings");
+// Reset settings to defaults
+document.getElementById("reset-settings").addEventListener("click", () => {
+  // Clear localStorage
+  localStorage.removeItem("feedbackEnabled");
+  localStorage.removeItem("refreshInterval");
+  localStorage.removeItem("theme");
 
-// Open with fade-in
-openBtn.onclick = () => {
-  modal.classList.add("show");
-};
+  // Restore defaults
+  document.getElementById("enable-feedback").checked = true;
+  document.getElementById("refresh-interval").value = 60;
+  refreshInterval = 60 * 60; // 60 minutes in seconds
+  document.getElementById("theme-select").value = "dark";
+  applyTheme("dark");
 
-// Close with fade-out
-closeBtn.onclick = () => {
-  modal.classList.remove("show");
-};
-
-window.onclick = (event) => {
-  if (event.target == modal) {
-    modal.classList.remove("show");
-  }
-};
-
-const sidebar = document.getElementById("settings-sidebar");
-const openBtn = document.getElementById("open-settings");
-const closeBtn = document.getElementById("close-settings");
-
-// Open sidebar
-openBtn.onclick = () => {
-  sidebar.classList.add("show");
-};
-
-// Close sidebar
-closeBtn.onclick = () => {
-  sidebar.classList.remove("show");
-};
-
-// Close if clicking outside (optional)
-window.onclick = (event) => {
-  if (event.target == sidebar) {
-    sidebar.classList.remove("show");
-  }
-};
-
-// Tab switching logic
-const tabButtons = document.querySelectorAll(".tab-btn");
-const tabContents = document.querySelectorAll(".tab-content");
-
-tabButtons.forEach(button => {
-  button.addEventListener("click", () => {
-    // Remove active from all
-    tabButtons.forEach(btn => btn.classList.remove("active"));
-    tabContents.forEach(content => content.classList.remove("active"));
-
-    // Add active to clicked tab
-    button.classList.add("active");
-    document.getElementById(button.dataset.tab).classList.add("active");
-  });
+  alert("✅ Settings have been reset to defaults!");
 });
