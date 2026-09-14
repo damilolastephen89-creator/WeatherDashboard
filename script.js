@@ -461,3 +461,36 @@ document.getElementById("reset-settings").addEventListener("click", () => {
   // Optional: keep alert for extra feedback
   alert("✅ Settings have been reset to defaults!");
 });
+
+// Toast function
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  // Hide after 3 seconds
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3000);
+}
+
+document.getElementById("reset-settings").addEventListener("click", () => {
+  // Clear localStorage
+  localStorage.removeItem("feedbackEnabled");
+  localStorage.removeItem("refreshInterval");
+  localStorage.removeItem("theme");
+
+  // Restore defaults
+  document.getElementById("enable-feedback").checked = true;
+  document.getElementById("refresh-interval").value = 60;
+  refreshInterval = 60 * 60; // 60 minutes in seconds
+  document.getElementById("theme-select").value = "dark";
+  applyTheme("dark");
+
+  // Trigger sidebar animation
+  sidebar.classList.add("reset-animate");
+  setTimeout(() => sidebar.classList.remove("reset-animate"), 1200);
+
+  // Show toast instead of alert
+  showToast("✅ Settings reset to defaults!");
+});
