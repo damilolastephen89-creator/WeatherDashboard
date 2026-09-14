@@ -531,3 +531,16 @@ document.getElementById("reset-settings").addEventListener("click", () => {
   // Show success toast
   showToast("✅ Settings reset to defaults!", "success");
 });
+
+document.getElementById("theme-select").addEventListener("change", function() {
+  const selectedTheme = this.value;
+  localStorage.setItem("theme", selectedTheme);
+  applyTheme(selectedTheme);
+
+  // Show info toast when theme changes
+  if (selectedTheme === "dark") {
+    showToast("🌑 Dark mode applied", "info");
+  } else {
+    showToast("☀️ Light mode applied", "info");
+  }
+});
