@@ -617,3 +617,23 @@ body.light-theme::before {
   0% { transform: translateX(-150px); }
   100% { transform: translateX(100vw); }
 }
+
+@keyframes sunrise {
+  0%   { background: linear-gradient(135deg, #000000, #001f3f); }
+  50%  { background: linear-gradient(135deg, #FF4500, #FFD700); }
+  100% { background: linear-gradient(135deg, #FFFFFF, #FFD700, #FFA500); }
+}
+
+@keyframes sunset {
+  0%   { background: linear-gradient(135deg, #FFFFFF, #FFD700, #FFA500); }
+  50%  { background: linear-gradient(135deg, #FF4500, #8B0000); }
+  100% { background: linear-gradient(135deg, #000000, #001f3f, #003366); }
+}
+
+body.sunrise {
+  animation: sunrise 2s ease forwards;
+}
+
+body.sunset {
+  animation: sunset 2s ease forwards;
+}
