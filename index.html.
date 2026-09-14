@@ -48,6 +48,9 @@
   <button id="reset-alerts">🔄 Show All Alerts</button>
   <p id="countdown"></p>
 
+<!-- Toast Notification -->
+<div id="toast"></div>
+
   <script src="script.js"></script>
 </body>
 
@@ -103,3 +106,5 @@
 </div>
 
 <button id="reset-settings">♻️ Reset to Defaults</button>
+
+<button id="reset-settings">♻️ Reset to Defaults <span id="reset-check"></span></button>
