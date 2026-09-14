@@ -544,3 +544,25 @@ document.getElementById("theme-select").addEventListener("change", function() {
     showToast("☀️ Light mode applied", "info");
   }
 });
+
+document.getElementById("theme-select").addEventListener("change", function() {
+  const selectedTheme = this.value;
+  localStorage.setItem("theme", selectedTheme);
+  applyTheme(selectedTheme);
+
+  const themeIcon = document.getElementById("theme-icon");
+
+  // Update icon based on theme
+  themeIcon.textContent = selectedTheme === "dark" ? "🌑" : "☀️";
+
+  // Trigger animation
+  themeIcon.classList.add("animate");
+  setTimeout(() => themeIcon.classList.remove("animate"), 800);
+
+  // Show info toast
+  if (selectedTheme === "dark") {
+    showToast("🌑 Dark mode applied", "info");
+  } else {
+    showToast("☀️ Light mode applied", "info");
+  }
+});
