@@ -51,6 +51,9 @@
 <!-- Toast Notification -->
 <div id="toast"></div>
 
+<!-- Horizon silhouette -->
+<div id="horizon" class="horizon-mountains"></div>
+
   <script src="script.js"></script>
 </body>
 
