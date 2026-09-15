@@ -195,4 +195,9 @@ body.sunset {
   z-index: 5;
 }
 
+/* Parallax smooth transform */
+.star, .cloud, #horizon {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
 
