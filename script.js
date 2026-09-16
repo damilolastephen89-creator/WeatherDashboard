@@ -122,10 +122,20 @@ window.onload = function() {
   }
 };
 
-// Responsive parallax effect
+// Combined parallax effect (scroll + mouse)
+let mouseX = 0, mouseY = 0;
+
+window.addEventListener("mousemove", function(e) {
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
+
+  mouseX = (e.clientX - centerX) / centerX;
+  mouseY = (e.clientY - centerY) / centerY;
+});
+
 window.addEventListener("scroll", function() {
   const scrollY = window.scrollY;
-  const isMobile = window.innerWidth < 768; // breakpoint for mobile
+  const isMobile = window.innerWidth < 768;
 
   // Adjust speed factors based on device
   const starSpeed = isMobile ? 0.1 : 0.2;
@@ -134,43 +144,17 @@ window.addEventListener("scroll", function() {
 
   // Stars (far background)
   document.querySelectorAll(".star").forEach(star => {
-    star.style.transform = `translateY(${scrollY * starSpeed}px)`;
+    star.style.transform = `translate(${mouseX * 10}px, ${scrollY * starSpeed + mouseY * 10}px)`;
   });
 
   // Clouds (mid layer)
   document.querySelectorAll(".cloud").forEach(cloud => {
-    cloud.style.transform = `translateY(${scrollY * cloudSpeed}px)`;
+    cloud.style.transform = `translate(${mouseX * 20}px, ${scrollY * cloudSpeed + mouseY * 15}px)`;
   });
 
   // Horizon (foreground base)
   const horizon = document.getElementById("horizon");
   if (horizon) {
-    horizon.style.transform = `translateY(${scrollY * horizonSpeed}px)`;
-  }
-});
-
-// Mouse-move parallax effect
-window.addEventListener("mousemove", function(e) {
-  const centerX = window.innerWidth / 2;
-  const centerY = window.innerHeight / 2;
-
-  // Calculate offset based on mouse position
-  const offsetX = (e.clientX - centerX) / centerX;
-  const offsetY = (e.clientY - centerY) / centerY;
-
-  // Stars (subtle drift)
-  document.querySelectorAll(".star").forEach(star => {
-    star.style.transform = `translate(${offsetX * 10}px, ${offsetY * 10}px)`;
-  });
-
-  // Clouds (stronger drift)
-  document.querySelectorAll(".cloud").forEach(cloud => {
-    cloud.style.transform = `translate(${offsetX * 20}px, ${offsetY * 15}px)`;
-  });
-
-  // Horizon (very subtle shift)
-  const horizon = document.getElementById("horizon");
-  if (horizon) {
-    horizon.style.transform = `translate(${offsetX * 5}px, ${offsetY * 3}px)`;
+    horizon.style.transform = `translate(${mouseX * 5}px, ${scrollY * horizonSpeed + mouseY * 3}px)`;
   }
 });
