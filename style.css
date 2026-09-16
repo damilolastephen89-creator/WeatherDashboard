@@ -229,7 +229,7 @@ body.sunset {
   box-shadow: 0 0 8px rgba(255, 106, 0, 0.5);
 }
 
-/* Pulse animation for Reset Parallax button */
+/* Default pulse animation */
 @keyframes pulseGlow {
   0% {
     box-shadow: 0 0 12px rgba(255, 106, 0, 0.6);
@@ -245,6 +245,69 @@ body.sunset {
   }
 }
 
+/* Dark theme pulse (blue glow) */
+@keyframes pulseGlowDark {
+  0% {
+    box-shadow: 0 0 12px rgba(0, 150, 255, 0.6);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 150, 255, 1);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 0 12px rgba(0, 150, 255, 0.6);
+    transform: scale(1);
+  }
+}
+
 #reset-parallax {
+  background: linear-gradient(135deg, #ff6a00, #ee0979);
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
   animation: pulseGlow 2s infinite ease-in-out;
+}
+
+/* Switch glow based on theme */
+body.dark-theme #reset-parallax {
+  background: linear-gradient(135deg, #004e92, #000428);
+  animation: pulseGlowDark 2s infinite ease-in-out;
+}
+
+/* Base toast style */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 18px;
+  border-radius: 6px;
+  font-weight: bold;
+  color: #fff;
+  animation: fadeInOut 4s ease forwards;
+  z-index: 9999;
+}
+
+/* Light theme (warm tones) */
+body.light-theme .toast {
+  background: linear-gradient(135deg, #ff6a00, #ee0979);
+  box-shadow: 0 0 12px rgba(255, 106, 0, 0.6);
+}
+
+/* Dark theme (cool tones) */
+body.dark-theme .toast {
+  background: linear-gradient(135deg, #004e92, #000428);
+  box-shadow: 0 0 12px rgba(0, 150, 255, 0.6);
+}
+
+/* Toast animation */
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(20px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(20px); }
 }
