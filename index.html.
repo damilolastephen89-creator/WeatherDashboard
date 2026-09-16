@@ -122,3 +122,5 @@
     <span id="theme-icon">🌑</span>
   </label>
 </div>
+
+<button id="reset-parallax">Reset Parallax</button>
