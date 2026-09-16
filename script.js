@@ -119,3 +119,4 @@ function showToast(message, type = "info", persistent = false) {
     }, duration);
   }
 }
+
