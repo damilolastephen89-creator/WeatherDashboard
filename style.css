@@ -201,3 +201,7 @@ body.sunset {
   transition: transform 0.1s linear;
 }
 
+.star, .cloud, #horizon {
+  will-change: transform;
+  transition: transform 0.2s ease-out;
+}
