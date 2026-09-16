@@ -25,15 +25,29 @@ document.getElementById("reset-settings").addEventListener("click", function() {
   showToast("✔️ Settings reset successfully", "success");
 });
 
-// Toast function
-function showToast(message, type) {
-  const toast = document.getElementById("toast");
-  toast.textContent = message;
-  toast.className = "";
-  toast.classList.add("show", type);
+function showToast(message, type = "info") {
+  const toast = document.createElement("div");
+  toast.className = "toast";
+
+  // Choose icon based on type + theme
+  let icon = "";
+  if (type === "success") icon = "✅";
+  else if (type === "error") icon = "❌";
+  else if (type === "warning") icon = "⚠️";
+  else if (type === "info") {
+    if (document.body.classList.contains("dark-theme")) {
+      icon = "🌙"; // dark mode info
+    } else {
+      icon = "🌞"; // light mode info
+    }
+  }
+
+  toast.textContent = `${icon} ${message}`;
+  document.body.appendChild(toast);
+
   setTimeout(() => {
-    toast.classList.remove("show", type);
-  }, 3000);
+    toast.remove();
+  }, 4000);
 }
 
 // Theme handling
