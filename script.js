@@ -26,6 +26,14 @@ document.getElementById("reset-settings").addEventListener("click", function() {
 });
 
 function showToast(message, type = "info") {
+  // Ensure container exists
+  let container = document.querySelector(".toast-container");
+  if (!container) {
+    container = document.createElement("div");
+    container.className = "toast-container";
+    document.body.appendChild(container);
+  }
+
   const toast = document.createElement("div");
   toast.className = "toast";
 
@@ -35,16 +43,13 @@ function showToast(message, type = "info") {
   else if (type === "error") icon = "❌";
   else if (type === "warning") icon = "⚠️";
   else if (type === "info") {
-    if (document.body.classList.contains("dark-theme")) {
-      icon = "🌙"; // dark mode info
-    } else {
-      icon = "🌞"; // light mode info
-    }
+    icon = document.body.classList.contains("dark-theme") ? "🌙" : "🌞";
   }
 
   toast.textContent = `${icon} ${message}`;
-  document.body.appendChild(toast);
+  container.appendChild(toast);
 
+  // Remove after animation
   setTimeout(() => {
     toast.remove();
   }, 4000);
