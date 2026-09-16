@@ -46,12 +46,23 @@ function showToast(message, type = "info") {
     icon = document.body.classList.contains("dark-theme") ? "🌙" : "🌞";
   }
 
-  toast.textContent = `${icon} ${message}`;
+  // Toast content wrapper
+  const content = document.createElement("span");
+  content.textContent = `${icon} ${message}`;
+
+  // Close button
+  const closeBtn = document.createElement("span");
+  closeBtn.textContent = "✖";
+  closeBtn.className = "toast-close";
+  closeBtn.addEventListener("click", () => toast.remove());
+
+  toast.appendChild(content);
+  toast.appendChild(closeBtn);
   container.appendChild(toast);
 
-  // Remove after animation
+  // Auto remove after 4s
   setTimeout(() => {
-    toast.remove();
+    if (toast.parentNode) toast.remove();
   }, 4000);
 }
 
