@@ -375,3 +375,66 @@ body.dark-theme .toast {
   background: linear-gradient(135deg, #004e92, #000428);
   box-shadow: 0 0 12px rgba(0, 150, 255, 0.6);
 }
+
+/* Slide + fade animation */
+@keyframes slideInOut {
+  0% { opacity: 0; transform: translateX(100%) translateY(20px); }
+  10% { opacity: 1; transform: translateX(0) translateY(0); }
+  90% { opacity: 1; transform: translateX(0) translateY(0); }
+  100% { opacity: 0; transform: translateX(100%) translateY(20px); }
+}
+
+/* Toast container (stacking) */
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9999;
+}
+
+.toast {
+  padding: 12px 18px;
+  border-radius: 6px;
+  font-weight: bold;
+  color: #fff;
+  animation: slideInOut 4s ease forwards;
+}
+
+/* Light theme (warm tones) */
+body.light-theme .toast {
+  background: linear-gradient(135deg, #ff6a00, #ee0979);
+  box-shadow: 0 0 12px rgba(255, 106, 0, 0.6);
+}
+
+/* Dark theme (cool tones) */
+body.dark-theme .toast {
+  background: linear-gradient(135deg, #004e92, #000428);
+  box-shadow: 0 0 12px rgba(0, 150, 255, 0.6);
+}
+
+.toast {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border-radius: 6px;
+  font-weight: bold;
+  color: #fff;
+  animation: slideInOut 4s ease forwards;
+}
+
+.toast-close {
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: 10px;
+  transition: transform 0.2s ease;
+}
+
+.toast-close:hover {
+  transform: scale(1.2);
+  color: #ffd700; /* golden highlight on hover */
+}
