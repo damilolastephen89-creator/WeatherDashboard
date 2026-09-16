@@ -228,3 +228,23 @@ body.sunset {
   transform: scale(0.95);
   box-shadow: 0 0 8px rgba(255, 106, 0, 0.5);
 }
+
+/* Pulse animation for Reset Parallax button */
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 12px rgba(255, 106, 0, 0.6);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 106, 0, 1);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 0 12px rgba(255, 106, 0, 0.6);
+    transform: scale(1);
+  }
+}
+
+#reset-parallax {
+  animation: pulseGlow 2s infinite ease-in-out;
+}
