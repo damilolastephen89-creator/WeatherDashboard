@@ -162,3 +162,29 @@ window.addEventListener("scroll", function() {
     horizon.style.transform = `translate(${mouseX * 5}px, ${scrollY * horizonSpeed + mouseY * 3}px)`;
   }
 });
+
+// Reset parallax button
+document.getElementById("reset-parallax").addEventListener("click", function() {
+  // Reset mouse offsets
+  mouseX = 0;
+  mouseY = 0;
+  targetX = 0;
+  targetY = 0;
+
+  // Reset transforms
+  document.querySelectorAll(".star").forEach(star => {
+    star.style.transform = "translate(0, 0)";
+  });
+
+  document.querySelectorAll(".cloud").forEach(cloud => {
+    cloud.style.transform = "translate(0, 0)";
+  });
+
+  const horizon = document.getElementById("horizon");
+  if (horizon) {
+    horizon.style.transform = "translate(0, 0)";
+  }
+
+  // Toast confirmation
+  showToast("🎯 Parallax reset to center", "info");
+});
