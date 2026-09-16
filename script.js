@@ -122,23 +122,55 @@ window.onload = function() {
   }
 };
 
-// Parallax effect on scroll
+// Responsive parallax effect
 window.addEventListener("scroll", function() {
   const scrollY = window.scrollY;
+  const isMobile = window.innerWidth < 768; // breakpoint for mobile
 
-  // Stars move slower (far background)
+  // Adjust speed factors based on device
+  const starSpeed = isMobile ? 0.1 : 0.2;
+  const cloudSpeed = isMobile ? 0.2 : 0.4;
+  const horizonSpeed = isMobile ? 0.05 : 0.1;
+
+  // Stars (far background)
   document.querySelectorAll(".star").forEach(star => {
-    star.style.transform = `translateY(${scrollY * 0.2}px)`;
+    star.style.transform = `translateY(${scrollY * starSpeed}px)`;
   });
 
-  // Clouds move a bit faster (mid layer)
+  // Clouds (mid layer)
   document.querySelectorAll(".cloud").forEach(cloud => {
-    cloud.style.transform = `translateY(${scrollY * 0.4}px)`;
+    cloud.style.transform = `translateY(${scrollY * cloudSpeed}px)`;
   });
 
-  // Horizon moves slightly (foreground base)
+  // Horizon (foreground base)
   const horizon = document.getElementById("horizon");
   if (horizon) {
-    horizon.style.transform = `translateY(${scrollY * 0.1}px)`;
+    horizon.style.transform = `translateY(${scrollY * horizonSpeed}px)`;
+  }
+});
+
+// Mouse-move parallax effect
+window.addEventListener("mousemove", function(e) {
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
+
+  // Calculate offset based on mouse position
+  const offsetX = (e.clientX - centerX) / centerX;
+  const offsetY = (e.clientY - centerY) / centerY;
+
+  // Stars (subtle drift)
+  document.querySelectorAll(".star").forEach(star => {
+    star.style.transform = `translate(${offsetX * 10}px, ${offsetY * 10}px)`;
+  });
+
+  // Clouds (stronger drift)
+  document.querySelectorAll(".cloud").forEach(cloud => {
+    cloud.style.transform = `translate(${offsetX * 20}px, ${offsetY * 15}px)`;
+  });
+
+  // Horizon (very subtle shift)
+  const horizon = document.getElementById("horizon");
+  if (horizon) {
+    horizon.style.transform = `translate(${offsetX * 5}px, ${offsetY * 3}px)`;
   }
 });
