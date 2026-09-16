@@ -37,7 +37,7 @@ function showToast(message, type = "info", persistent = false) {
   const toast = document.createElement("div");
   toast.className = "toast";
 
-  // Choose icon based on type + theme
+  // Icon logic
   let icon = "";
   if (type === "success") icon = "✅";
   else if (type === "error") icon = "❌";
@@ -46,7 +46,7 @@ function showToast(message, type = "info", persistent = false) {
     icon = document.body.classList.contains("dark-theme") ? "🌙" : "🌞";
   }
 
-  // Toast content wrapper
+  // Content
   const content = document.createElement("span");
   content.textContent = `${icon} ${message}`;
 
@@ -56,18 +56,25 @@ function showToast(message, type = "info", persistent = false) {
   closeBtn.className = "toast-close";
   closeBtn.addEventListener("click", () => toast.remove());
 
+  // Progress bar
+  const progress = document.createElement("div");
+  progress.className = "toast-progress";
+
   toast.appendChild(content);
   toast.appendChild(closeBtn);
+  toast.appendChild(progress);
   container.appendChild(toast);
 
-  // Auto remove only if not persistent
+  // Auto remove if not persistent
   if (!persistent) {
+    let duration = 4000; // 4 seconds
+    progress.style.animation = `progressBar ${duration}ms linear forwards`;
+
     setTimeout(() => {
       if (toast.parentNode) toast.remove();
-    }, 4000);
+    }, duration);
   }
 }
-
 
 // Theme handling
 function applyTheme(theme) {
