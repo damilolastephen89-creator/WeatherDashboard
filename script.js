@@ -122,25 +122,29 @@ window.onload = function() {
   }
 };
 
-// Combined parallax effect (scroll + mouse)
+// Combined parallax effect with inertia (scroll + mouse)
 let mouseX = 0, mouseY = 0;
+let targetX = 0, targetY = 0;
 
 window.addEventListener("mousemove", function(e) {
   const centerX = window.innerWidth / 2;
   const centerY = window.innerHeight / 2;
 
-  mouseX = (e.clientX - centerX) / centerX;
-  mouseY = (e.clientY - centerY) / centerY;
+  targetX = (e.clientX - centerX) / centerX;
+  targetY = (e.clientY - centerY) / centerY;
 });
 
 window.addEventListener("scroll", function() {
   const scrollY = window.scrollY;
   const isMobile = window.innerWidth < 768;
 
-  // Adjust speed factors based on device
   const starSpeed = isMobile ? 0.1 : 0.2;
   const cloudSpeed = isMobile ? 0.2 : 0.4;
   const horizonSpeed = isMobile ? 0.05 : 0.1;
+
+  // Smoothly interpolate mouse position (inertia)
+  mouseX += (targetX - mouseX) * 0.05;
+  mouseY += (targetY - mouseY) * 0.05;
 
   // Stars (far background)
   document.querySelectorAll(".star").forEach(star => {
