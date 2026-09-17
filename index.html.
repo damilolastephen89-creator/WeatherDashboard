@@ -29,6 +29,14 @@
 <button id="clear-history">Clear History</button>
 
   <script src="script.js"></script>
+<div style="margin:20px; padding:10px; border:1px solid #ccc; border-radius:6px;">
+  <h3>Toast Test Panel</h3>
+  <button onclick="showToast('✅ Data loaded successfully','success')">Success Toast</button>
+  <button onclick="showToast('❌ API connection failed','error', true)">Error Toast (Persistent)</button>
+  <button onclick="showToast('⚠️ Weather data not available','warning', true)">Warning Toast (Persistent)</button>
+  <button onclick="showToast('🌞 Parallax reset to center','info')">Info Toast</button>
+</div>
+
 </body>
 </html>
 
