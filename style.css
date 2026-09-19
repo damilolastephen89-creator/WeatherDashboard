@@ -164,3 +164,10 @@ button:hover {
   text-align: center;
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
+
+.forecast-card img {
+  width: 60px;
+  height: 60px;
+  margin: 10px auto;
+  display: block;
+}
