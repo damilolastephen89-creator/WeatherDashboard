@@ -162,19 +162,24 @@ async function getForecast(city) {
 
     if (data.cod === "200") {
       let forecastHTML = "<h3>5‑Day Forecast</h3><div class='forecast-grid'>";
-      // Pick one forecast per day (around 12:00)
       const daily = data.list.filter(item => item.dt_txt.includes("12:00:00"));
+
       daily.forEach(day => {
         const date = new Date(day.dt_txt).toLocaleDateString();
+        const iconCode = day.weather[0].icon; // e.g. "04d"
+        const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+
         forecastHTML += `
           <div class="forecast-card">
             <h4>${date}</h4>
+            <img src="${iconUrl}" alt="${day.weather[0].description}">
             <p>🌡️ Temp: ${day.main.temp} °C</p>
             <p>☁️ ${day.weather[0].description}</p>
             <p>💨 Wind: ${day.wind.speed} m/s</p>
           </div>
         `;
       });
+
       forecastHTML += "</div>";
       document.getElementById("forecast").innerHTML += forecastHTML;
     }
