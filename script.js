@@ -120,3 +120,65 @@ function showToast(message, type = "info", persistent = false) {
   }
 }
 
+// Use your Vercel env variable: NEXT_PUBLIC_WEATHER_API_KEY
+const apiKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
+
+document.getElementById("searchBtn").addEventListener("click", () => {
+  const city = document.getElementById("cityInput").value;
+  if (city) {
+    getWeather(city);
+    getForecast(city);
+  }
+});
+
+async function getWeather(city) {
+  try {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+    );
+    const data = await response.json();
+
+    if (data.cod === 200) {
+      document.getElementById("forecast").innerHTML = `
+        <h2>${data.name}, ${data.sys.country}</h2>
+        <p>🌡️ Temperature: ${data.main.temp} °C</p>
+        <p>☁️ Weather: ${data.weather[0].description}</p>
+        <p>💨 Wind Speed: ${data.wind.speed} m/s</p>
+      `;
+    } else {
+      document.getElementById("forecast").innerHTML = `<p>City not found!</p>`;
+    }
+  } catch (error) {
+    document.getElementById("forecast").innerHTML = `<p>Error fetching data.</p>`;
+  }
+}
+
+async function getForecast(city) {
+  try {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
+    );
+    const data = await response.json();
+
+    if (data.cod === "200") {
+      let forecastHTML = "<h3>5‑Day Forecast</h3><div class='forecast-grid'>";
+      // Pick one forecast per day (around 12:00)
+      const daily = data.list.filter(item => item.dt_txt.includes("12:00:00"));
+      daily.forEach(day => {
+        const date = new Date(day.dt_txt).toLocaleDateString();
+        forecastHTML += `
+          <div class="forecast-card">
+            <h4>${date}</h4>
+            <p>🌡️ Temp: ${day.main.temp} °C</p>
+            <p>☁️ ${day.weather[0].description}</p>
+            <p>💨 Wind: ${day.wind.speed} m/s</p>
+          </div>
+        `;
+      });
+      forecastHTML += "</div>";
+      document.getElementById("forecast").innerHTML += forecastHTML;
+    }
+  } catch (error) {
+    document.getElementById("forecast").innerHTML += `<p>Error fetching forecast.</p>`;
+  }
+}
