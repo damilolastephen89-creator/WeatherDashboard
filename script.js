@@ -1,4 +1,5 @@
-console.log("Injected API Key:", process.env.NEXT_PUBLIC_WEATHER_API_KEY);
+const apiKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
+console.log("Injected API Key:", apiKey);
 
 /* ===========================
    Parallax with Inertia
@@ -189,5 +190,3 @@ async function getForecast(city) {
     document.getElementById("forecast").innerHTML += `<p>Error fetching forecast.</p>`;
   }
 }
-
-const apiKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
