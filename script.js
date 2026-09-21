@@ -1,5 +1,38 @@
-const apiKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
-console.log("Injected API Key:", apiKey);
+// Define the function at the top of script.js
+async function getWeather(city) {
+  try {
+    const response = await fetch(`/api/weather?city=${city}`);
+    const data = await response.json();
+    console.log("Weather data:", data); // test output
+    return data;
+  } catch (error) {
+    console.error("Error fetching weather:", error);
+  }
+}
+
+// Example: hook into your search button
+document.querySelector("#searchBtn").addEventListener("click", () => {
+  const city = document.querySelector("#cityInput").value;
+  getWeather(city).then(data => {
+    if (data) {
+      // Update your UI with the weather data
+      // For example:
+      document.querySelector("#cityName").textContent = data.city.name;
+      document.querySelector("#temperature").textContent = data.list[0].main.temp + "°C";
+      // Add more DOM updates here based on your HTML structure
+    }
+  });
+});
+
+// Optional: load default city on page load
+window.addEventListener("DOMContentLoaded", () => {
+  getWeather("Lagos").then(data => {
+    if (data) {
+      document.querySelector("#cityName").textContent = data.city.name;
+      document.querySelector("#temperature").textContent = data.list[0].main.temp + "°C";
+    }
+  });
+});
 
 /* ===========================
    Parallax with Inertia
@@ -122,9 +155,6 @@ function showToast(message, type = "info", persistent = false) {
     }, duration);
   }
 }
-
-// Use your Vercel env variable: NEXT_PUBLIC_WEATHER_API_KEY
-const apiKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
 
 document.getElementById("searchBtn").addEventListener("click", () => {
   const city = document.getElementById("cityInput").value;
