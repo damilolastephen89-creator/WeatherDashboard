@@ -253,6 +253,38 @@ Object.keys(dailyForecasts).slice(0, 5).forEach(date => {
   const avgTemp = temps.reduce((sum, t) => sum + t, 0) / temps.length;
   const minTemp = Math.min(...temps);
   const maxTemp = Math.max(...temps);
+  
+// Calculate gradient based on avgTemp
+let gradient;
+if (avgTemp <= 15) {
+  // Cold day
+  gradient = "linear-gradient(135deg, #bbdefb, #2196f3)"; // cool blue
+} else if (avgTemp > 15 && avgTemp <= 25) {
+  // Mild day
+  gradient = "linear-gradient(135deg, #c8e6c9, #4caf50)"; // greenish
+} else if (avgTemp > 25 && avgTemp <= 35) {
+  // Warm day
+  gradient = "linear-gradient(135deg, #fff9c4, #fdd835)"; // yellow
+} else {
+  // Hot day
+  gradient = "linear-gradient(135deg, #ffccbc, #e53935)"; // orange-red
+}
+
+// Build card
+const card = document.createElement("div");
+card.className = "forecast-card";
+card.style.background = gradient;
+card.innerHTML = `
+  <p>${date}</p>
+  <img src="${iconUrl}" alt="${firstEntry.weather[0].description}" />
+  <p>Avg: ${avgTemp.toFixed(1)}°C</p>
+  <p class="temp-range">
+    ❄️ Min: <span class="min">${minTemp.toFixed(1)}°C</span> | 
+    🔥 Max: <span class="max">${maxTemp.toFixed(1)}°C</span>
+  </p>
+  <p>${firstEntry.weather[0].description}</p>
+`;
+forecastContainer.appendChild(card);
 
   // Use the first entry’s weather description/icon for the day
   const firstEntry = items[0];
@@ -267,17 +299,15 @@ Object.keys(dailyForecasts).slice(0, 5).forEach(date => {
 
   // Build card
   const card = document.createElement("div");
-  card.className = `forecast-card ${theme}`;
- card.innerHTML = `
+ card.className = `forecast-card ${theme}`;
+card.innerHTML = `
   <p>${date}</p>
   <img src="${iconUrl}" alt="${firstEntry.weather[0].description}" />
   <p>Avg: ${avgTemp.toFixed(1)}°C</p>
   <p class="temp-range">
-    Min: <span class="min">${minTemp.toFixed(1)}°C</span> | 
-    Max: <span class="max">${maxTemp.toFixed(1)}°C</span>
+    ❄️ Min: <span class="min">${minTemp.toFixed(1)}°C</span> | 
+    🔥 Max: <span class="max">${maxTemp.toFixed(1)}°C</span>
   </p>
   <p>${firstEntry.weather[0].description}</p>
 `;
 
-  forecastContainer.appendChild(card);
-});
