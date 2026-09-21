@@ -241,3 +241,16 @@ data.list.slice(0, 5).forEach(item => {
   height: 50px;
   margin: 8px 0;
 }
+.forecast-card .temp-range {
+  font-weight: bold;
+  color: #444;
+  margin-top: 4px;
+}
+
+.forecast-card .temp-range span.min {
+  color: #2196f3; /* blue for min */
+}
+
+.forecast-card .temp-range span.max {
+  color: #e53935; /* red for max */
+}
