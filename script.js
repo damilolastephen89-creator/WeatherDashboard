@@ -286,6 +286,16 @@ card.innerHTML = `
 `;
 forecastContainer.appendChild(card);
 
+  // Fade-in effect for sticky legend
+window.addEventListener("scroll", () => {
+  const legend = document.getElementById("legend");
+  if (window.scrollY > 50) {
+    legend.classList.add("sticky-visible");
+  } else {
+    legend.classList.remove("sticky-visible");
+  }
+});
+
   // Use the first entry’s weather description/icon for the day
   const firstEntry = items[0];
   let theme = "cloudy"; // default
