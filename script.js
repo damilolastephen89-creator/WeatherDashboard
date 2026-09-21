@@ -231,10 +231,53 @@ async function getForecast(city) {
         `;
       });
 
-      forecastHTML += "</div>";
-      document.getElementById("forecast").innerHTML += forecastHTML;
-    }
-  } catch (error) {
-    document.getElementById("forecast").innerHTML += `<p>Error fetching forecast.</p>`;
+  const forecastContainer = document.querySelector("#forecast");
+forecastContainer.innerHTML = ""; // clear old forecast
+
+// Group forecasts by date
+const dailyForecasts = {};
+data.list.forEach(item => {
+  const date = new Date(item.dt_txt).toLocaleDateString();
+  if (!dailyForecasts[date]) {
+    dailyForecasts[date] = [];
   }
-}
+  dailyForecasts[date].push(item);
+});
+
+// Show 5 days max
+Object.keys(dailyForecasts).slice(0, 5).forEach(date => {
+  const items = dailyForecasts[date];
+
+  // Calculate average, min, and max temperatures
+  const temps = items.map(entry => entry.main.temp);
+  const avgTemp = temps.reduce((sum, t) => sum + t, 0) / temps.length;
+  const minTemp = Math.min(...temps);
+  const maxTemp = Math.max(...temps);
+
+  // Use the first entry’s weather description/icon for the day
+  const firstEntry = items[0];
+  let theme = "cloudy"; // default
+  const description = firstEntry.weather[0].main.toLowerCase();
+  if (description.includes("clear")) theme = "sunny";
+  else if (description.includes("rain")) theme = "rainy";
+  else if (description.includes("storm")) theme = "stormy";
+
+  const iconCode = firstEntry.weather[0].icon;
+  const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+
+  // Build card
+  const card = document.createElement("div");
+  card.className = `forecast-card ${theme}`;
+ card.innerHTML = `
+  <p>${date}</p>
+  <img src="${iconUrl}" alt="${firstEntry.weather[0].description}" />
+  <p>Avg: ${avgTemp.toFixed(1)}°C</p>
+  <p class="temp-range">
+    Min: <span class="min">${minTemp.toFixed(1)}°C</span> | 
+    Max: <span class="max">${maxTemp.toFixed(1)}°C</span>
+  </p>
+  <p>${firstEntry.weather[0].description}</p>
+`;
+
+  forecastContainer.appendChild(card);
+});
