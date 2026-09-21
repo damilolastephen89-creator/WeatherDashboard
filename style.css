@@ -171,3 +171,73 @@ button:hover {
   margin: 10px auto;
   display: block;
 }
+
+#forecast {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.forecast-card {
+  background: #f0f4f8;        /* light background */
+  border-radius: 8px;         /* rounded corners */
+  padding: 12px;
+  width: 150px;               /* fixed card width */
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* subtle shadow */
+  transition: transform 0.2s ease;
+}
+
+.forecast-card:hover {
+  transform: translateY(-4px); /* lift effect on hover */
+}
+
+.forecast-card p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.forecast-card p:first-child {
+  font-weight: bold;
+  color: #0077cc;             /* highlight date/time */
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 600px) {
+  #forecast {
+    flex-direction: column;   /* stack cards vertically */
+    align-items: center;      /* center them */
+  }
+
+  .forecast-card {
+    width: 90%;              /* take most of the screen width */
+    max-width: 300px;        /* but don’t get too wide */
+  }
+}
+
+data.list.slice(0, 5).forEach(item => {
+  const card = document.createElement("div");
+
+  // Pick a theme based on weather description
+  let theme = "cloudy"; // default
+  const description = item.weather[0].main.toLowerCase();
+  if (description.includes("clear")) theme = "sunny";
+  else if (description.includes("rain")) theme = "rainy";
+  else if (description.includes("storm")) theme = "stormy";
+
+  card.className = `forecast-card ${theme}`;
+  card.innerHTML = `
+    <p>${new Date(item.dt_txt).toLocaleString()}</p>
+    <p>${item.main.temp}°C</p>
+    <p>${item.weather[0].description}</p>
+  `;
+  forecastContainer.appendChild(card);
+});
+
+.forecast-card img {
+  width: 50px;
+  height: 50px;
+  margin: 8px 0;
+}
