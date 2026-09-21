@@ -310,3 +310,38 @@ data.list.slice(0, 5).forEach(item => {
   background: linear-gradient(135deg, #ffccbc, #e53935);
   color: #fff;
 }
+
+#legend {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+  padding: 10px;
+  background: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+
+  position: sticky;   /* key property */
+  top: 0;             /* stick to top of viewport */
+  z-index: 1000;      /* keep above forecast cards */
+}
+
+#legend {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+  padding: 10px;
+  background: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  opacity: 0;              /* start transparent */
+  transition: opacity 0.6s ease-in-out; /* smooth fade */
+}
+
+#legend.sticky-visible {
+  opacity: 1;              /* fade in when active */
+}
