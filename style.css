@@ -410,3 +410,313 @@ data.list.slice(0, 5).forEach(item => {
   filter: brightness(1.2);       /* slight glow */
   cursor: pointer;               /* interactive feel */
 }
+
+.legend {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip styling */
+.legend::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 120%; /* above the element */
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(50, 50, 50, 0.85);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  font-size: 0.85em;
+}
+
+/* Tooltip arrow */
+.legend::before {
+  content: "";
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: rgba(50, 50, 50, 0.85) transparent transparent transparent;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Show tooltip on hover */
+.legend:hover::after,
+.legend:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+.legend {
+  position: relative;
+  display: inline-block;
+}
+
+/* Base tooltip style */
+.legend::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 120%; /* above the element */
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  font-size: 0.85em;
+}
+
+/* Tooltip arrow */
+.legend::before {
+  content: "";
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Show tooltip on hover */
+.legend:hover::after,
+.legend:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+/* Cold tooltip */
+.legend.cold::after {
+  background: linear-gradient(135deg, #bbdefb, #2196f3);
+}
+.legend.cold::before {
+  border-color: #2196f3 transparent transparent transparent;
+}
+
+/* Mild tooltip */
+.legend.mild::after {
+  background: linear-gradient(135deg, #c8e6c9, #4caf50);
+}
+.legend.mild::before {
+  border-color: #4caf50 transparent transparent transparent;
+}
+
+/* Warm tooltip */
+.legend.warm::after {
+  background: linear-gradient(135deg, #fff9c4, #fdd835);
+  color: #333; /* darker text for contrast */
+}
+.legend.warm::before {
+  border-color: #fdd835 transparent transparent transparent;
+}
+
+/* Hot tooltip */
+.legend.hot::after {
+  background: linear-gradient(135deg, #ffccbc, #e53935);
+}
+.legend.hot::before {
+  border-color: #e53935 transparent transparent transparent;
+}
+
+.legend::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 120%; /* above the element */
+  left: 50%;
+  transform: translateX(-50%) translateY(10px); /* start slightly lower */
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  font-size: 0.85em;
+}
+
+/* Tooltip arrow */
+.legend::before {
+  content: "";
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px); /* start lower */
+  border-width: 6px;
+  border-style: solid;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Show tooltip on hover */
+.legend:hover::after,
+.legend:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0); /* rise into place */
+}
+
+/* Base tooltip style */
+.legend::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  font-size: 0.85em;
+}
+
+/* Tooltip arrow */
+.legend::before {
+  content: "";
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  border-width: 6px;
+  border-style: solid;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* Bounce keyframes */
+@keyframes fadeUpBounce {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-4px);
+  }
+  80% {
+    transform: translateX(-50%) translateY(2px);
+  }
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Show tooltip on hover with bounce */
+.legend:hover::after,
+.legend:hover::before {
+  opacity: 1;
+  animation: fadeUpBounce 0.5s ease forwards;
+}
+
+/* Bounce keyframes already defined earlier */
+@keyframes fadeUpBounce {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-4px);
+  }
+  80% {
+    transform: translateX(-50%) translateY(2px);
+  }
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Apply staggered delays */
+#legend .legend:nth-child(1):hover::after,
+#legend .legend:nth-child(1):hover::before {
+  animation: fadeUpBounce 0.5s ease forwards;
+  animation-delay: 0s;
+}
+
+#legend .legend:nth-child(2):hover::after,
+#legend .legend:nth-child(2):hover::before {
+  animation: fadeUpBounce 0.5s ease forwards;
+  animation-delay: 0.05s;
+}
+
+#legend .legend:nth-child(3):hover::after,
+#legend .legend:nth-child(3):hover::before {
+  animation: fadeUpBounce 0.5s ease forwards;
+  animation-delay: 0.1s;
+}
+
+#legend .legend:nth-child(4):hover::after,
+#legend .legend:nth-child(4):hover::before {
+  animation: fadeUpBounce 0.5s ease forwards;
+  animation-delay: 0.15s;
+}
+
+/* Cold glow */
+.legend.cold:hover {
+  box-shadow: 0 0 12px rgba(33, 150, 243, 0.7); /* blue glow */
+}
+
+/* Mild glow */
+.legend.mild:hover {
+  box-shadow: 0 0 12px rgba(76, 175, 80, 0.7); /* green glow */
+}
+
+/* Warm glow */
+.legend.warm:hover {
+  box-shadow: 0 0 12px rgba(253, 216, 53, 0.7); /* yellow glow */
+}
+
+/* Hot glow */
+.legend.hot:hover {
+  box-shadow: 0 0 12px rgba(229, 57, 53, 0.7); /* red glow */
+}
+
+/* Pulse keyframes */
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  }
+  50% {
+    box-shadow: 0 0 16px currentColor;
+  }
+  100% {
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  }
+}
+
+/* Cold glow pulse */
+.legend.cold:hover {
+  color: #2196f3;
+  animation: pulseGlow 1.5s infinite;
+}
+
+/* Mild glow pulse */
+.legend.mild:hover {
+  color: #4caf50;
+  animation: pulseGlow 1.5s infinite;
+}
+
+/* Warm glow pulse */
+.legend.warm:hover {
+  color: #fdd835;
+  animation: pulseGlow 1.5s infinite;
+}
+
+/* Hot glow pulse */
+.legend.hot:hover {
+  color: #e53935;
+  animation: pulseGlow 1.5s infinite;
+}
