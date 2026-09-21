@@ -1,4 +1,4 @@
-// Define the function at the top of script.js
+// Define the function at the top
 async function getWeather(city) {
   try {
     const response = await fetch(`/api/weather?city=${city}`);
@@ -10,16 +10,32 @@ async function getWeather(city) {
   }
 }
 
-// Example: hook into your search button
+// Hook into your search button
 document.querySelector("#searchBtn").addEventListener("click", () => {
   const city = document.querySelector("#cityInput").value;
   getWeather(city).then(data => {
     if (data) {
-      // Update your UI with the weather data
-      // For example:
+      // Update city name
       document.querySelector("#cityName").textContent = data.city.name;
-      document.querySelector("#temperature").textContent = data.list[0].main.temp + "°C";
-      // Add more DOM updates here based on your HTML structure
+
+      // Update current temperature
+      document.querySelector("#temperature").textContent =
+        data.list[0].main.temp + "°C";
+
+      // Update forecast cards
+      const forecastContainer = document.querySelector("#forecast");
+      forecastContainer.innerHTML = ""; // clear old forecast
+
+      data.list.slice(0, 5).forEach(item => {
+        const card = document.createElement("div");
+        card.className = "forecast-card";
+        card.innerHTML = `
+          <p>${new Date(item.dt_txt).toLocaleString()}</p>
+          <p>${item.main.temp}°C</p>
+          <p>${item.weather[0].description}</p>
+        `;
+        forecastContainer.appendChild(card);
+      });
     }
   });
 });
@@ -29,10 +45,12 @@ window.addEventListener("DOMContentLoaded", () => {
   getWeather("Lagos").then(data => {
     if (data) {
       document.querySelector("#cityName").textContent = data.city.name;
-      document.querySelector("#temperature").textContent = data.list[0].main.temp + "°C";
+      document.querySelector("#temperature").textContent =
+        data.list[0].main.temp + "°C";
     }
   });
 });
+
 
 /* ===========================
    Parallax with Inertia
