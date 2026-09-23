@@ -800,3 +800,24 @@ data.list.slice(0, 5).forEach(item => {
 #sound-toggle input {
   margin-right: 6px;
 }
+
+.forecast-card {
+  background: rgba(255,255,255,0.2);
+  border-radius: 12px;
+  padding: 12px;
+  margin: 10px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.forecast-card .details {
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+}
+
+.forecast-card.expanded .details {
+  max-height: 200px; /* enough space for details */
+  opacity: 1;
+}
