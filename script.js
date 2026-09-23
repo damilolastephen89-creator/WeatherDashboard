@@ -379,3 +379,23 @@ document.querySelectorAll('.forecast-card').forEach(card => {
   });
 });
                                                 
+function setWeatherBackground(condition) {
+  const bg = document.getElementById('background');
+  bg.innerHTML = ''; // clear old
+
+  if (condition.includes('Rain')) {
+    for (let i = 0; i < 50; i++) {
+      const drop = document.createElement('div');
+      drop.className = 'raindrop';
+      drop.style.left = Math.random() * window.innerWidth + 'px';
+      drop.style.animationDelay = Math.random() + 's';
+      bg.appendChild(drop);
+    }
+  }
+  // Add similar blocks for Snow, Clouds, Sun, etc.
+}
+
+document.getElementById('themeSwitch').addEventListener('change', e => {
+  document.documentElement.setAttribute('data-theme', e.target.value);
+});
+  
