@@ -470,3 +470,9 @@ function sendNotification(message) {
   }
 }
   
+function clothingSuggestion(temp, condition) {
+  if (condition.includes('Rain')) return "Bring an umbrella and wear a waterproof jacket.";
+  if (temp > 30) return "Light clothing, sunglasses, and stay hydrated.";
+  if (temp < 15) return "Wear a warm jacket and scarf.";
+  return "Comfortable casual wear is fine.";
+}
