@@ -821,3 +821,18 @@ data.list.slice(0, 5).forEach(item => {
   max-height: 200px; /* enough space for details */
   opacity: 1;
 }
+
+/* Example: raindrops */
+@keyframes rainFall {
+  0% { transform: translateY(-100px); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateY(600px); opacity: 0; }
+}
+
+.raindrop {
+  position: absolute;
+  width: 2px;
+  height: 12px;
+  background: rgba(0,0,255,0.6);
+  animation: rainFall 1s linear infinite;
+}
