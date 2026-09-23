@@ -836,3 +836,19 @@ data.list.slice(0, 5).forEach(item => {
   background: rgba(0,0,255,0.6);
   animation: rainFall 1s linear infinite;
 }
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #f5f5f5;
+}
+
+[data-theme="frosted"] {
+  --bg-color: rgba(255,255,255,0.2);
+  --text-color: #fff;
+  backdrop-filter: blur(10px);
+}
