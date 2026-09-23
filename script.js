@@ -338,3 +338,37 @@ document.querySelectorAll('.legend').forEach(item => {
     }, 600);
   });
 });
+
+// Preload sound
+const clickSound = new Audio('sounds/waterdrop.mp3');
+let soundEnabled = true;
+
+// Toggle listener
+document.getElementById('soundSwitch').addEventListener('change', function() {
+  soundEnabled = this.checked;
+});
+
+// Ripple + sound effect
+document.querySelectorAll('.legend').forEach(item => {
+  item.addEventListener('click', function(e) {
+    // Ripple effect
+    const circle = document.createElement('span');
+    circle.classList.add('ripple');
+    const rect = this.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    circle.style.width = circle.style.height = size + 'px';
+    circle.style.left = e.clientX - rect.left - size / 2 + 'px';
+    circle.style.top = e.clientY - rect.top - size / 2 + 'px';
+    this.appendChild(circle);
+
+    setTimeout(() => {
+      circle.remove();
+    }, 600);
+
+    // Play sound only if enabled
+    if (soundEnabled) {
+      clickSound.currentTime = 0;
+      clickSound.play();
+    }
+  });
+});
