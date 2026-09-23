@@ -399,3 +399,26 @@ document.getElementById('themeSwitch').addEventListener('change', e => {
   document.documentElement.setAttribute('data-theme', e.target.value);
 });
   
+// Theme switch
+document.getElementById('themeSwitch').addEventListener('change', e => {
+  document.documentElement.setAttribute('data-theme', e.target.value);
+  localStorage.setItem('theme', e.target.value);
+});
+
+// Unit switch
+let unit = localStorage.getItem('unit') || 'C';
+document.getElementById('unitSwitch').value = unit;
+document.getElementById('unitSwitch').addEventListener('change', e => {
+  unit = e.target.value;
+  localStorage.setItem('unit', unit);
+  updateForecastDisplay(); // refresh cards
+});
+
+// Favorites
+function saveFavorite(city) {
+  let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  if (!favorites.includes(city)) {
+    favorites.push(city);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }
+}
