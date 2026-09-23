@@ -422,3 +422,51 @@ function saveFavorite(city) {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }
 }
+
+const ctx = document.getElementById('tempChart').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['Mon','Tue','Wed','Thu','Fri'],
+    datasets: [{
+      label: 'Highs',
+      data: [30, 32, 28, 29, 31],
+      borderColor: 'red',
+      fill: false
+    },{
+      label: 'Lows',
+      data: [22, 21, 20, 19, 23],
+      borderColor: 'blue',
+      fill: false
+    }]
+  }
+});
+
+function shareForecast(text) {
+  if (navigator.share) {
+    navigator.share({ text });
+  } else {
+    navigator.clipboard.writeText(text);
+    alert("Forecast copied to clipboard!");
+  }
+}
+
+function downloadChart() {
+  const link = document.createElement('a');
+  link.href = tempChart.toBase64Image();
+  link.download = 'temperature-trend.png';
+  link.click();
+}
+
+function sendNotification(message) {
+  if (Notification.permission === 'granted') {
+    new Notification(message);
+  } else if (Notification.permission !== 'denied') {
+    Notification.requestPermission().then(permission => {
+      if (permission === 'granted') {
+        new Notification(message);
+      }
+    });
+  }
+}
+  
