@@ -785,3 +785,18 @@ data.list.slice(0, 5).forEach(item => {
 .legend.hot .ripple {
   background-color: rgba(229, 57, 53, 0.5); /* red */
 }
+
+#sound-toggle {
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+#sound-toggle label {
+  cursor: pointer;
+  user-select: none;
+}
+
+#sound-toggle input {
+  margin-right: 6px;
+}
