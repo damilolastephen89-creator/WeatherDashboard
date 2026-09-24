@@ -486,3 +486,15 @@ function awardBadge(badgeName) {
   }
 }
                                                 
+async function loadTranslations(lang) {
+  const res = await fetch('lang/translations.json');
+  const data = await res.json();
+  const translations = data[lang];
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.dataset.i18n;
+    if (translations[key]) {
+      el.textContent = translations[key];
+    }
+  });
+}
