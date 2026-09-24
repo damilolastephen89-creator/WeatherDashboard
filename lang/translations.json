@@ -1,0 +1,20 @@
+{
+  "en": {
+    "sunny": "Sunny",
+    "rainy": "Rainy",
+    "humidity": "Humidity",
+    "wind": "Wind"
+  },
+  "fr": {
+    "sunny": "Ensoleillé",
+    "rainy": "Pluvieux",
+    "humidity": "Humidité",
+    "wind": "Vent"
+  },
+  "yo": {
+    "sunny": "Ọjọ́ oorun",
+    "rainy": "Ọjọ́ ojo",
+    "humidity": "Ìfarapa omi",
+    "wind": "Afẹ́fẹ́"
+  }
+}
