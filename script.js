@@ -498,3 +498,8 @@ async function loadTranslations(lang) {
     }
   });
 }
+
+document.getElementById('langSwitch').addEventListener('change', e => {
+  loadTranslations(e.target.value);
+});
+                                                
