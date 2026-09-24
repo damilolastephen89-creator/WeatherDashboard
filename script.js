@@ -476,3 +476,13 @@ function clothingSuggestion(temp, condition) {
   if (temp < 15) return "Wear a warm jacket and scarf.";
   return "Comfortable casual wear is fine.";
 }
+
+function awardBadge(badgeName) {
+  let badges = JSON.parse(localStorage.getItem('badges')) || [];
+  if (!badges.includes(badgeName)) {
+    badges.push(badgeName);
+    localStorage.setItem('badges', JSON.stringify(badges));
+    alert(`You earned the ${badgeName} badge!`);
+  }
+}
+                                                
