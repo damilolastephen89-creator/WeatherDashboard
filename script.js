@@ -619,3 +619,12 @@ prediction.print();
   
 // script.js
 runForecasting(); // call after preferences load
+
+// Example API forecast data
+const apiForecasts = [
+  { city: "Lagos", condition: "Rainy" },
+  { city: "Abuja", condition: "Sunny" }
+];
+
+displayAccuracy(apiForecasts);
+                                                
