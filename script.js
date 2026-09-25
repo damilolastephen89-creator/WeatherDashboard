@@ -617,3 +617,5 @@ await model.fit(xs, ys, {epochs: 100});
 const prediction = model.predict(tf.tensor1d([6]));
 prediction.print();
   
+// script.js
+runForecasting(); // call after preferences load
