@@ -209,3 +209,17 @@
 
 <!-- Main dashboard logic -->
 <script src="script.js"></script>
+
+<h3>🌍 Community Reports</h3>
+<form id="reportForm">
+  <input id="reportCity" type="text" placeholder="City" required>
+  <input id="reportCondition" type="text" placeholder="Condition (e.g., Rainy)" required>
+  <button type="submit">Submit Report</button>
+</form>
+
+<div id="communityFeed"></div>
+
+<script src="community/reports.js"></script>
+<script>
+  initReportForm();
+</script>
