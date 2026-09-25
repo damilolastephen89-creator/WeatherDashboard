@@ -503,3 +503,117 @@ document.getElementById('langSwitch').addEventListener('change', e => {
   loadTranslations(e.target.value);
 });
                                                 
+function initPreferences() {
+  // Language
+  const savedLang = localStorage.getItem('language') || 'en';
+  document.getElementById('langSwitch').value = savedLang;
+  loadTranslations(savedLang);
+
+  // Theme
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  document.getElementById('themeSwitch').value = savedTheme;
+  document.documentElement.setAttribute('data-theme', savedTheme);
+
+  // Units
+  const savedUnit = localStorage.getItem('unit') || 'C';
+  document.getElementById('unitSwitch').value = savedUnit;
+  updateForecastDisplay();
+
+  // Favorites
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  const favList = document.getElementById('favoritesList');
+  if (favList) {
+    favList.innerHTML = '';
+    favorites.forEach(city => {
+      const li = document.createElement('li');
+      li.textContent = city;
+      favList.appendChild(li);
+    });
+  }
+
+  // Badges (Gamification)
+  const badges = JSON.parse(localStorage.getItem('badges')) || [];
+  const badgeContainer = document.getElementById('badgeContainer');
+  if (badgeContainer) {
+    badgeContainer.innerHTML = '';
+    badges.forEach(badge => {
+      const span = document.createElement('span');
+      span.className = 'badge';
+      span.textContent = badge;
+      badgeContainer.appendChild(span);
+    });
+  }
+
+  // Streaks
+  const lastVisit = localStorage.getItem('lastVisit');
+  const today = new Date().toDateString();
+  let streak = parseInt(localStorage.getItem('streak') || '0');
+
+  if (lastVisit !== today) {
+    streak = lastVisit ? streak + 1 : 1;
+    localStorage.setItem('streak', streak);
+    localStorage.setItem('lastVisit', today);
+  }
+
+  const streakDisplay = document.getElementById('streakDisplay');
+  if (streakDisplay) {
+    streakDisplay.textContent = `🔥 ${streak}-day streak`;
+  }
+}
+
+// Run on startup
+window.addEventListener('DOMContentLoaded', initPreferences);
+
+// Language change
+document.getElementById('langSwitch').addEventListener('change', e => {
+  localStorage.setItem('language', e.target.value);
+  loadTranslations(e.target.value);
+});
+
+// Theme change
+document.getElementById('themeSwitch').addEventListener('change', e => {
+  localStorage.setItem('theme', e.target.value);
+  document.documentElement.setAttribute('data-theme', e.target.value);
+});
+
+// Unit change
+document.getElementById('unitSwitch').addEventListener('change', e => {
+  localStorage.setItem('unit', e.target.value);
+  updateForecastDisplay();
+});
+
+// Save favorite
+function saveFavorite(city) {
+  let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  if (!favorites.includes(city)) {
+    favorites.push(city);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    initPreferences(); // refresh list
+  }
+}
+
+// Award badge
+function awardBadge(badgeName) {
+  let badges = JSON.parse(localStorage.getItem('badges')) || [];
+  if (!badges.includes(badgeName)) {
+    badges.push(badgeName);
+    localStorage.setItem('badges', JSON.stringify(badges));
+    alert(`You earned the ${badgeName} badge!`);
+    initPreferences(); // refresh badges
+  }
+}
+
+// Example: Predict tomorrow's temperature
+const model = tf.sequential();
+model.add(tf.layers.dense({units: 1, inputShape: [1]}));
+model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
+
+// Train with past data
+const xs = tf.tensor1d([1,2,3,4,5]); // days
+const ys = tf.tensor1d([28,29,30,31,32]); // temps
+await model.fit(xs, ys, {epochs: 100});
+
+// Predict day 6
+const prediction = model.predict(tf.tensor1d([6]));
+prediction.print();
+  
