@@ -673,3 +673,6 @@ document.getElementById("themeToggle").addEventListener("click", () => {
     localStorage.setItem("theme", "light");
   }
 });
+
+initAuth();
+                                                
