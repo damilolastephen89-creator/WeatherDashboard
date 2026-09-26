@@ -648,3 +648,9 @@ const monthlyData = [
 ];
 renderTemperatureChart(monthlyData);
 renderRainfallChart(monthlyData);
+
+// Theme toggle
+document.getElementById("themeToggle").addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+});
+                                                
