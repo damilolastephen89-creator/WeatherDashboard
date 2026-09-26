@@ -628,3 +628,23 @@ const apiForecasts = [
 
 displayAccuracy(apiForecasts);
                                                 
+// AI Forecast
+runForecasting();
+
+// Community Reports
+initReportForm();
+
+// Analytics
+const apiForecasts = [
+  { city: "Lagos", condition: "Rainy" },
+  { city: "Abuja", condition: "Sunny" }
+];
+displayAccuracy(apiForecasts);
+
+const monthlyData = [
+  { month: "Jan", avgTemp: 28, rainfall: 50 },
+  { month: "Feb", avgTemp: 30, rainfall: 20 },
+  { month: "Mar", avgTemp: 32, rainfall: 80 }
+];
+renderTemperatureChart(monthlyData);
+renderRainfallChart(monthlyData);
