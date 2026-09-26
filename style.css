@@ -918,3 +918,48 @@ canvas {
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
+
+/* Dark Mode Base */
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+/* Forecast & Accuracy Cards */
+body.dark-mode .forecast-card {
+  background: #1e1e1e;
+  color: #e0e0e0;
+  box-shadow: 0 2px 6px rgba(255,255,255,0.1);
+}
+
+/* Community Feed */
+body.dark-mode #communityFeed {
+  background: #1e1e1e;
+  color: #e0e0e0;
+  box-shadow: 0 2px 6px rgba(255,255,255,0.1);
+}
+
+body.dark-mode .report-item {
+  border-bottom: 1px solid #333;
+}
+
+/* Report Form */
+body.dark-mode #reportForm input {
+  background: #2a2a2a;
+  color: #e0e0e0;
+  border: 1px solid #444;
+}
+
+body.dark-mode #reportForm button {
+  background: #2196F3;
+}
+
+body.dark-mode #reportForm button:hover {
+  background: #1976D2;
+}
+
+/* Charts */
+body.dark-mode canvas {
+  background: #1e1e1e;
+  box-shadow: 0 2px 6px rgba(255,255,255,0.1);
+}
