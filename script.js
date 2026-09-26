@@ -676,3 +676,25 @@ document.getElementById("themeToggle").addEventListener("click", () => {
 
 initAuth();
                                                 
+// Apply saved theme per user
+window.addEventListener("DOMContentLoaded", () => {
+  const user = localStorage.getItem("currentUser");
+  if (user) {
+    const prefs = JSON.parse(localStorage.getItem("userPrefs")) || {};
+    if (prefs[user] && prefs[user].theme === "dark") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+});
+
+// Theme toggle with persistence per user
+document.getElementById("themeToggle").addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+  const user = localStorage.getItem("currentUser");
+  if (user) {
+    let prefs = JSON.parse(localStorage.getItem("userPrefs")) || {};
+    if (!prefs[user]) prefs[user] = {};
+    prefs[user].theme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+    localStorage.setItem("userPrefs", JSON.stringify(prefs));
+  }
+});
