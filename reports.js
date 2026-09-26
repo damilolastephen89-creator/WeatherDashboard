@@ -51,3 +51,43 @@ function renderRainfallChart(monthlyData) {
     }
   });
 }
+
+function initReportForm() {
+  const form = document.getElementById("reportForm");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const city = document.getElementById("reportCity").value;
+    const condition = document.getElementById("reportCondition").value;
+    const user = localStorage.getItem("currentUser");
+
+    if (!user) {
+      alert("Please log in first!");
+      return;
+    }
+
+    const report = { city, condition, user, date: new Date().toLocaleString() };
+
+    // Save reports per user
+    let reports = JSON.parse(localStorage.getItem("reports")) || {};
+    if (!reports[user]) reports[user] = [];
+    reports[user].push(report);
+    localStorage.setItem("reports", JSON.stringify(reports));
+
+    displayReports(user);
+    form.reset();
+  });
+}
+
+function displayReports(user) {
+  const feed = document.getElementById("communityFeed");
+  feed.innerHTML = "";
+  const reports = JSON.parse(localStorage.getItem("reports")) || {};
+  if (reports[user]) {
+    reports[user].forEach(r => {
+      const div = document.createElement("div");
+      div.className = "report-item";
+      div.innerText = `${r.city} - ${r.condition} (${r.date})`;
+      feed.appendChild(div);
+    });
+  }
+}
