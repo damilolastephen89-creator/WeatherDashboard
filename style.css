@@ -852,3 +852,69 @@ data.list.slice(0, 5).forEach(item => {
   --text-color: #fff;
   backdrop-filter: blur(10px);
 }
+
+/* Forecast & Accuracy Cards */
+.forecast-card {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 10px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Community Reports */
+#communityFeed {
+  margin-top: 15px;
+  padding: 10px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.report-item {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+.report-item:last-child {
+  border-bottom: none;
+}
+
+/* Report Form */
+#reportForm {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+#reportForm input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+#reportForm button {
+  padding: 8px 12px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#reportForm button:hover {
+  background: #45a049;
+}
+
+/* Charts */
+canvas {
+  margin: 20px 0;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
