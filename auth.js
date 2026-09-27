@@ -26,3 +26,8 @@ function handleCredentialResponse(response) {
   document.getElementById("userProfile").innerText = `Welcome, ${user}!`;
   document.getElementById("loginSection").style.display = "none";
 }
+
+Application (client) ID
+795b3c76-4e95-46da-86a8-e6978c35b756
+Directory (tenant) ID
+27869747-32c9-443f-9917-4bdca06881bf
