@@ -31,3 +31,26 @@ Application (client) ID
 795b3c76-4e95-46da-86a8-e6978c35b756
 Directory (tenant) ID
 27869747-32c9-443f-9917-4bdca06881bf
+
+function initMicrosoftAuth() {
+  const msalConfig = {
+    auth: {
+      clientId: "YOUR_AZURE_CLIENT_ID",
+      authority: "https://login.microsoftonline.com/YOUR_TENANT_ID",
+      redirectUri: "https://weather-dashboard-git-main-empire-hustle.vercel.app/auth/microsoft/callback"
+    }
+  };
+
+  const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+  msalInstance.loginPopup({
+    scopes: ["user.read"]
+  }).then(response => {
+    const user = response.account.username;
+    localStorage.setItem("currentUser", user);
+    document.getElementById("userProfile").innerText = `Welcome, ${user}!`;
+    document.getElementById("loginSection").style.display = "none";
+  }).catch(error => {
+    console.error(error);
+  });
+}
