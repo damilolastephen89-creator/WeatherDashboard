@@ -7,15 +7,22 @@ function initAuth() {
 }
 
 function initGoogleAuth() {
-  google.accounts.id.initialize({
-    client_id: "62023891881-8pcolavqedtnqmpicjf8uch6tooqs1ui.apps.googleusercontent.com",
-    callback: handleCredentialResponse
+  gapi.load('auth2', function() {
+    gapi.auth2.init({
+      client_id: "YOUR_GOOGLE_CLIENT_ID",
+      redirect_uri: "https://weather-dashboard-omega-peach.vercel.app/auth/google/callback"
+    }).then(function(auth2) {
+      auth2.signIn().then(function(googleUser) {
+        const profile = googleUser.getBasicProfile();
+        const user = profile.getEmail();
+        localStorage.setItem("currentUser", user);
+        document.getElementById("userProfile").innerText = `Welcome, ${user}!`;
+        document.getElementById("loginSection").style.display = "none";
+      });
+    });
   });
-  google.accounts.id.renderButton(
-    document.getElementById("googleLogin"),
-    { theme: "outline", size: "large" }
-  );
 }
+
 
 function handleCredentialResponse(response) {
   const data = jwt_decode(response.credential);
