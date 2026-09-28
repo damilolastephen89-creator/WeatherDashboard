@@ -9,7 +9,7 @@ function initAuth() {
 function initGoogleAuth() {
   gapi.load('auth2', function() {
     gapi.auth2.init({
-      client_id: "YOUR_GOOGLE_CLIENT_ID",
+      client_id: "62023891881-8pcolavqedtnqmpicjf8uch6tooqs1ui.apps.googleusercontent.com",
       redirect_uri: "https://weather-dashboard-omega-peach.vercel.app/auth/google/callback"
     }).then(function(auth2) {
       auth2.signIn().then(function(googleUser) {
