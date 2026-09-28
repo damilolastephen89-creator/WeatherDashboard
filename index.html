@@ -4,9 +4,24 @@
 <link rel="icon" type="image/png" href="favicon.png">
   <meta charset="UTF-8">
   <title>Weather Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css"> 
+</head> 
+<body> 
+  
+  <head>
+  <!-- other head content -->
+  <script src="https://alcdn.msauth.net/browser/2.32.0/js/msal-browser.min.js"></script>
+  <script src="auth.js"></script>
 </head>
+
 <body>
+  <div id="loginSection" class="auth-card">
+    <button id="googleLogin">Login with Google</button>
+    <button onclick="initMicrosoftAuth()">Login with Microsoft</button>
+  </div>
+  <div id="userProfile"></div>
+</body>
+
   <!-- Search Section -->
   <div class="search-container">
     <input type="text" id="city-input" placeholder="Enter city name">
