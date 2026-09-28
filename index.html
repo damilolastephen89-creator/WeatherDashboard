@@ -11,7 +11,9 @@
   <head>
   <!-- other head content -->
   <script src="https://alcdn.msauth.net/browser/2.32.0/js/msal-browser.min.js"></script>
-  <script src="auth.js"></script>
+  <script src="auth.js"></script> 
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="auth.js"></script>
 </head>
 
 <body>
@@ -274,5 +276,6 @@
 </div>
 
 <div id="loginSection" class="auth-card">
+  <button onclick="initGoogleAuth()">Login with Google</button>
   <button onclick="initMicrosoftAuth()">Login with Microsoft</button>
 </div>
