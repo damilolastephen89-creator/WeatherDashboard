@@ -6,11 +6,18 @@ function initAuth() {
   });
 }
 
-function initGoogleAuth() {
+function handleCredentialResponse(response) {
+  const data = jwt_decode(response.credential);
+  const user = data.email;
+  localStorage.setItem("currentUser", user);
+  document.getElementById("userProfile").innerText = `Welcome, ${user}!`;
+  document.getElementById("loginSection").style.display = "none";
+}
+
+    function initGoogleAuth() {
   gapi.load('auth2', function() {
     gapi.auth2.init({
-      client_id: "62023891881-8pcolavqedtnqmpicjf8uch6tooqs1ui.apps.googleusercontent.com",
-      redirect_uri: "https://weather-dashboard-omega-peach.vercel.app/auth/google/callback"
+      client_id: "62023891881-8pcolavqedtnqmpicjf8uch6tooqs1ui.apps.googleusercontent.com"
     }).then(function(auth2) {
       auth2.signIn().then(function(googleUser) {
         const profile = googleUser.getBasicProfile();
@@ -18,18 +25,11 @@ function initGoogleAuth() {
         localStorage.setItem("currentUser", user);
         document.getElementById("userProfile").innerText = `Welcome, ${user}!`;
         document.getElementById("loginSection").style.display = "none";
+      }).catch(error => {
+        console.error("Google login error:", error);
       });
     });
   });
-}
-
-
-function handleCredentialResponse(response) {
-  const data = jwt_decode(response.credential);
-  const user = data.email;
-  localStorage.setItem("currentUser", user);
-  document.getElementById("userProfile").innerText = `Welcome, ${user}!`;
-  document.getElementById("loginSection").style.display = "none";
 }
 
 function initMicrosoftAuth() {
@@ -51,6 +51,7 @@ function initMicrosoftAuth() {
     document.getElementById("userProfile").innerText = `Welcome, ${user}!`;
     document.getElementById("loginSection").style.display = "none";
   }).catch(error => {
-    console.error(error);
+    console.error("Microsoft login error:", error);
   });
 }
+
