@@ -6,14 +6,6 @@ function initAuth() {
   });
 }
 
-function handleCredentialResponse(response) {
-  const data = jwt_decode(response.credential);
-  const user = data.email;
-  localStorage.setItem("currentUser", user);
-  document.getElementById("userProfile").innerText = `Welcome, ${user}!`;
-  document.getElementById("loginSection").style.display = "none";
-}
-
     function initGoogleAuth() {
   gapi.load('auth2', function() {
     gapi.auth2.init({
@@ -55,3 +47,10 @@ function initMicrosoftAuth() {
   });
 }
 
+function handleCredentialResponse(response) {
+  const data = jwt_decode(response.credential);
+  const user = data.email;
+  localStorage.setItem("currentUser", user);
+  document.getElementById("userProfile").innerText = `Welcome, ${user}!`;
+  document.getElementById("loginSection").style.display = "none";
+}
