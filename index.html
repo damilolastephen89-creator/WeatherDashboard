@@ -8,18 +8,16 @@
 </head> 
 <body> 
   
-  <head>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-<script src="https://alcdn.msauth.net/browser/2.32.0/js/msal-browser.min.js"></script>
-<script src="auth.js"></script>
+<head>
+
+  <!-- Load Google API -->
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+  <script src="https://alcdn.msauth.net/browser/2.32.0/js/msal-browser.min.js"></script>
+
+  <script src="auth.js"></script>
 </head>
 <body>
-  <div id="loginSection" class="auth-card">
-    <button id="googleLogin">Login with Google</button>
-    <button onclick="initMicrosoftAuth()">Login with Microsoft</button>
-  </div>
-  <div id="userProfile"></div>
-</body>
 
   <!-- Search Section -->
   <div class="search-container">
@@ -263,16 +261,13 @@
   <input id="password" type="password" placeholder="Enter password">
   <button id="loginBtn">Login</button>
 </div>
+
 <div id="userProfile"></div>
-
-<script src="auth.js"></script>
-
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-<div id="loginSection" class="auth-card">
-  <button id="googleLogin">Login with Google</button>
-</div>
-
 <div id="loginSection" class="auth-card">
   <button onclick="initGoogleAuth()">Login with Google</button>
   <button onclick="initMicrosoftAuth()">Login with Microsoft</button>
 </div>
+
+<div id="userProfile"></div>
+
+<script src="auth.js"></script>
