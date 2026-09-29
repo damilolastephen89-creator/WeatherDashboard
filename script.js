@@ -703,7 +703,7 @@ document.getElementById("themeToggle").addEventListener("click", () => {
 function initGoogleAuth() {
   gapi.load('auth2', function() {
     const auth2 = gapi.auth2.init({
-      client_id: "YOUR_GOOGLE_CLIENT_ID"
+      client_id: "62023891881-8pcolavqedtnqmpicjf8uch6tooqs1ui.apps.googleusercontent.com"
     });
 
     auth2.signIn().then(function(googleUser) {
