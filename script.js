@@ -699,10 +699,11 @@ document.getElementById("themeToggle").addEventListener("click", () => {
   }
 });
   
+// --- Google Login Setup ---
 function initGoogleAuth() {
   gapi.load('auth2', function() {
     gapi.auth2.init({
-      client_id: 62023891881-8pcolavqedtnqmpicjf8uch6tooqs1ui.apps.googleusercontent.com"
+      client_id: "62023891881-8pcolavqedtnqmpicjf8uch6tooqs1ui.apps.googleusercontent.com"
     });
   });
 }
@@ -714,6 +715,8 @@ document.getElementById("googleLoginBtn").addEventListener("click", function() {
     document.getElementById("userProfile").innerText =
       `Welcome, ${profile.getName()}!`;
     document.getElementById("loginSection").style.display = "none";
+  }).catch(function(error) {
+    console.error("Google login failed:", error);
   });
 });
 
@@ -728,7 +731,6 @@ function initMicrosoftAuth() {
   };
 
   const msalInstance = new msal.PublicClientApplication(msalConfig);
-
   msalInstance.loginPopup({
     scopes: ["user.read"]
   }).then(response => {
