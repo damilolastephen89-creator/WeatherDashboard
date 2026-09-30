@@ -699,24 +699,23 @@ document.getElementById("themeToggle").addEventListener("click", () => {
   }
 });
   
-  // GOOGLE LOGIN
 function initGoogleAuth() {
   gapi.load('auth2', function() {
-    const auth2 = gapi.auth2.init({
-      client_id: "62023891881-8pcolavqedtnqmpicjf8uch6tooqs1ui.apps.googleusercontent.com"
-    });
-
-    auth2.signIn().then(function(googleUser) {
-      const profile = googleUser.getBasicProfile();
-      const user = profile.getEmail();
-      localStorage.setItem("currentUser", user);
-      document.getElementById("userProfile").innerText = `Welcome, ${user}!`;
-      document.getElementById("loginSection").style.display = "none";
-    }).catch(error => {
-      console.error("Google login error:", error);
+    gapi.auth2.init({
+      client_id: 62023891881-8pcolavqedtnqmpicjf8uch6tooqs1ui.apps.googleusercontent.com"
     });
   });
 }
+
+document.getElementById("googleLoginBtn").addEventListener("click", function() {
+  const auth2 = gapi.auth2.getAuthInstance();
+  auth2.signIn().then(function(googleUser) {
+    const profile = googleUser.getBasicProfile();
+    document.getElementById("userProfile").innerText =
+      `Welcome, ${profile.getName()}!`;
+    document.getElementById("loginSection").style.display = "none";
+  });
+});
 
 // MICROSOFT LOGIN
 function initMicrosoftAuth() {
