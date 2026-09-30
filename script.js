@@ -735,8 +735,11 @@ function initMicrosoftAuth() {
   }).then(response => {
     const user = response.account.username;
     localStorage.setItem("currentUser", user);
-    let loginCard = document.getElementById("loginSection");.innerText = `Welcome, ${user}!`;
-let profileCard = document.getElementById("userProfile");.style.display = "none";
+   let loginCard = document.getElementById("loginSection");
+let profileCard = document.getElementById("userProfile");
+
+profileCard.innerText = `Welcome, ${user}!`;
+loginCard.style.display = "none";
   }).catch(error => {
     console.error("Microsoft login error:", error);
   });
