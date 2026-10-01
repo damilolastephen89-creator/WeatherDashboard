@@ -270,7 +270,7 @@ if (avgTemp <= 15) {
   gradient = "linear-gradient(135deg, #ffccbc, #e53935)"; // orange-red
 }
 
-// Build card
+// Build card (first one)
 const card = document.createElement("div");
 card.className = "forecast-card";
 card.style.background = gradient;
@@ -286,7 +286,7 @@ card.innerHTML = `
 `;
 forecastContainer.appendChild(card);
 
-  // Fade-in effect for sticky legend
+// Fade-in effect for sticky legend
 window.addEventListener("scroll", () => {
   const legend = document.getElementById("legend");
   if (window.scrollY > 50) {
@@ -296,22 +296,21 @@ window.addEventListener("scroll", () => {
   }
 });
 
-  // Use the first entry’s weather description/icon for the day
-  const firstEntry = items[0];
-  let theme = "cloudy"; // default
-  const description = firstEntry.weather[0].main.toLowerCase();
-  if (description.includes("clear")) theme = "sunny";
-  else if (description.includes("rain")) theme = "rainy";
-  else if (description.includes("storm")) theme = "stormy";
+// Use the first entry’s weather description/icon for the day
+const firstEntry = items[0];
+let theme = "cloudy"; // default
+const description = firstEntry.weather[0].main.toLowerCase();
+if (description.includes("clear")) theme = "sunny";
+else if (description.includes("rain")) theme = "rainy";
+else if (description.includes("storm")) theme = "stormy";
 
-  const iconCode = firstEntry.weather[0].icon;
-  const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+const iconCode = firstEntry.weather[0].icon;
+const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
 
-  // Build card
-  const card = document.createElement("div");
- card.className = `forecast-card ${theme}`;
-card.innerHTML = `
-  <p>${date}</p>
+// Build forecast card (renamed)
+const forecastCard = document.createElement("div");
+forecastCard.className = `forecast-card ${theme}`;
+forecastCard.innerHTML = `<p>${date}</p>
   <img src="${iconUrl}" alt="${firstEntry.weather[0].description}" />
   <p>Avg: ${avgTemp.toFixed(1)}°C</p>
   <p class="temp-range">
@@ -320,6 +319,7 @@ card.innerHTML = `
   </p>
   <p>${firstEntry.weather[0].description}</p>
 `;
+forecastContainer.appendChild(forecastCard);
 
 document.querySelectorAll('.legend').forEach(item => {
   item.addEventListener('click', function(e) {
@@ -331,6 +331,9 @@ document.querySelectorAll('.legend').forEach(item => {
     circle.style.left = e.clientX - rect.left - size / 2 + 'px';
     circle.style.top = e.clientY - rect.top - size / 2 + 'px';
     this.appendChild(circle);
+  });
+});
+
 
     // Remove ripple after animation
     setTimeout(() => {
