@@ -320,7 +320,7 @@ forecastCard.innerHTML = `<p>${date}</p>
   <p>${firstEntry.weather[0].description}</p>
 `;
 forecastContainer.appendChild(forecastCard);
-
+ 
 document.querySelectorAll('.legend').forEach(item => {
   item.addEventListener('click', function(e) {
     const circle = document.createElement('span');
@@ -333,7 +333,6 @@ document.querySelectorAll('.legend').forEach(item => {
     this.appendChild(circle);
   });
 });
-
 
     // Remove ripple after animation
     setTimeout(() => {
