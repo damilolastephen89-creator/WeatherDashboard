@@ -703,7 +703,7 @@ document.getElementById("themeToggle").addEventListener("click", () => {
 function initGoogleAuth() {
   gapi.load('auth2', function() {
     gapi.auth2.init({
-      client_id: "62023891881-8pcolavqedtnqmpicjf8uch6tooqs1ui.apps.googleusercontent.com"
+      client_id: "62023891881-8pcolavqedtnqmpicjf8uch6tooqs1ui.apps.googleusercontent.com" 
     });
   });
 }
@@ -712,9 +712,13 @@ document.getElementById("googleLoginBtn").addEventListener("click", function() {
   const auth2 = gapi.auth2.getAuthInstance();
   auth2.signIn().then(function(googleUser) {
     const profile = googleUser.getBasicProfile();
+    const id_token = googleUser.getAuthResponse().id_token; // <-- JWT
+
     document.getElementById("userProfile").innerText =
       `Welcome, ${profile.getName()}!`;
     document.getElementById("loginSection").style.display = "none";
+
+    console.log("Google ID Token (JWT):", id_token);
   }).catch(function(error) {
     console.error("Google login failed:", error);
   });
