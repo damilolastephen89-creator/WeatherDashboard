@@ -708,6 +708,24 @@ document.getElementById("googleLoginBtn").addEventListener("click", function() {
   });
 });
 
+    const id_token = googleUser.getAuthResponse().id_token;
+
+fetch("http://localhost:4000/verify-token", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ id_token })
+})
+.then(res => res.json())
+.then(data => {
+  if (data.success) {
+    console.log("Verified user:", data.user);
+    document.getElementById("userProfile").innerText =
+      `Welcome, ${data.user.name}!`;
+  } else {
+    console.error("Token verification failed:", data.error);
+  }
+});
+
 // MICROSOFT LOGIN
 function initMicrosoftAuth() {
   const msalConfig = {
