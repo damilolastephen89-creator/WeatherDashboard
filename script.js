@@ -22,24 +22,6 @@ document.querySelector("#searchBtn").addEventListener("click", () => {
       document.querySelector("#temperature").textContent =
         data.list[0].main.temp + "°C";
 
-      // Update forecast cards
-      const forecastContainer = document.querySelector("#forecast");
-      forecastContainer.innerHTML = ""; // clear old forecast
-
-      data.list.slice(0, 5).forEach(item => {
-        const card = document.createElement("div");
-        card.className = "forecast-card";
-        card.innerHTML = `
-          <p>${new Date(item.dt_txt).toLocaleString()}</p>
-          <p>${item.main.temp}°C</p>
-          <p>${item.weather[0].description}</p>
-        `;
-        forecastContainer.appendChild(card);
-      });
-    }
-  });
-});
-
 // Optional: load default city on page load
 window.addEventListener("DOMContentLoaded", () => {
   getWeather("Lagos").then(data => {
@@ -321,7 +303,6 @@ forecastCard.innerHTML = `<p>${date}</p>
 `;
 forecastContainer.appendChild(forecastCard);
 
- 
 document.querySelectorAll('.legend').forEach(item => {
   item.addEventListener('click', function(e) {
     const circle = document.createElement('span');
