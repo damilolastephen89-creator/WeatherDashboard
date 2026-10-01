@@ -307,7 +307,7 @@ else if (description.includes("storm")) theme = "stormy";
 const iconCode = firstEntry.weather[0].icon;
 const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
 
-// Build forecast card (renamed)
+// Build forecast card
 const forecastCard = document.createElement("div");
 forecastCard.className = `forecast-card ${theme}`;
 forecastCard.innerHTML = `<p>${date}</p>
@@ -320,6 +320,7 @@ forecastCard.innerHTML = `<p>${date}</p>
   <p>${firstEntry.weather[0].description}</p>
 `;
 forecastContainer.appendChild(forecastCard);
+
  
 document.querySelectorAll('.legend').forEach(item => {
   item.addEventListener('click', function(e) {
