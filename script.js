@@ -767,3 +767,27 @@ loginCard.style.display = "none";
     console.error("Microsoft login error:", error);
   });
 }
+
+  async function fetchWeather(city) {
+  const res = await fetch(`/api/weather?city=${city}`);
+  const data = await res.json();
+
+  // Current weather
+  document.getElementById("cityName").innerText = data.current.name;
+  document.getElementById("temperature").innerText = `${data.current.main.temp}°C`;
+  document.getElementById("description").innerText = data.current.weather[0].description;
+
+  // Forecast (first 5 entries)
+  const forecastContainer = document.getElementById("forecast");
+  forecastContainer.innerHTML = "";
+  data.forecast.list.slice(0, 5).forEach(item => {
+    const forecastCard = document.createElement("div");
+    forecastCard.className = "forecast-card";
+    forecastCard.innerHTML = `
+      <p>${new Date(item.dt_txt).toLocaleString()}</p>
+      <p>${item.main.temp}°C</p>
+      <p>${item.weather[0].description}</p>
+    `;
+    forecastContainer.appendChild(forecastCard);
+  });
+}
