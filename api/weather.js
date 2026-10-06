@@ -25,18 +25,30 @@ export async function getWeather(city) {
   }
 }
 
-// api/weather.js
 export default async function handler(req, res) {
   const { city } = req.query;
   const API_KEY = process.env.OPENWEATHER_API_KEY;
 
   try {
-    const response = await fetch(
+    // Current weather
+    const currentRes = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
     );
-    const data = await response.json();
-    res.status(200).json(data);
+    const currentData = await currentRes.json();
+
+    // 5-day forecast
+    const forecastRes = await fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`
+    );
+    const forecastData = await forecastRes.json();
+
+    // Return both together
+    res.status(200).json({
+      current: currentData,
+      forecast: forecastData,
+    });
   } catch (error) {
+    console.error("Weather API error:", error);
     res.status(500).json({ error: "Failed to fetch weather data" });
   }
 }
