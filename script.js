@@ -186,6 +186,22 @@ async function getWeather(city) {
   }
 }
 
+async function fetchWeather(city) {
+  try {
+    const res = await fetch(`/api/weather?city=${city}`);
+    const data = await res.json();
+
+    // Update UI
+    document.getElementById("cityName").innerText = data.name;
+    document.getElementById("temperature").innerText = `${data.main.temp}°C`;
+    document.getElementById("description").innerText = data.weather[0].description;
+    document.getElementById("icon").src =
+      `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+  } catch (err) {
+    console.error("Error fetching weather:", err);
+  }
+}
+      
 async function getForecast(city) {
   try {
     const response = await fetch(
