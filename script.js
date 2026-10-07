@@ -791,3 +791,7 @@ loginCard.style.display = "none";
     forecastContainer.appendChild(forecastCard);
   });
 }
+
+  document.getElementById("themeToggle").addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+});
