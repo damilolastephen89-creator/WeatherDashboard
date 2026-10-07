@@ -716,6 +716,19 @@ document.getElementById("themeToggle").addEventListener("click", () => {
     localStorage.setItem("userPrefs", JSON.stringify(prefs));
   }
 });
+const themeToggle = document.getElementById("themeToggle");
+
+// Load saved theme
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark-mode");
+  themeToggle.checked = true;
+}
+
+// Toggle theme
+themeToggle.addEventListener("change", () => {
+  document.body.classList.toggle("dark-mode", themeToggle.checked);
+  localStorage.setItem("theme", themeToggle.checked ? "dark" : "light");
+});
   
 // --- Google Login Setup ---
 function initGoogleAuth() {
