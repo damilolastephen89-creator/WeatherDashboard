@@ -1047,3 +1047,28 @@ body.dark-mode .forecast-card {
 .theme-switch input:checked + .slider .moon {
   opacity: 1;
 }
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: #4facfe;
+  color: #fff;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Keep the toggle aligned */
+.theme-switch {
+  margin-left: auto;
+}
