@@ -963,3 +963,28 @@ body.dark-mode canvas {
   background: #1e1e1e;
   box-shadow: 0 2px 6px rgba(255,255,255,0.1);
 }
+
+/* Default (light mode) */
+body {
+  background: #f0f0f0;
+  color: #333;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Forecast cards in light mode */
+.forecast-card {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: #fff;
+}
+
+/* Dark mode */
+body.dark-mode {
+  background: #121212;
+  color: #e0e0e0;
+}
+
+/* Forecast cards in dark mode */
+body.dark-mode .forecast-card {
+  background: linear-gradient(135deg, #434343, #000000);
+  color: #e0e0e0;
+}
