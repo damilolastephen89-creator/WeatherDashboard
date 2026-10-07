@@ -172,6 +172,29 @@ body.dark-mode .forecast-card {
   color: #e0e0e0;
 }
 
+/* Forecast card base */
+.forecast-card {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  width: 150px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.6s ease-in-out, color 0.6s ease-in-out;
+}
+
+/* Hover animation */
+.forecast-card:hover {
+  transform: scale(1.05); /* gentle zoom */
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3); /* deeper shadow */
+}
+
+/* Dark mode hover */
+body.dark-mode .forecast-card:hover {
+  box-shadow: 0 8px 16px rgba(255,255,255,0.2); /* subtle glow in dark mode */
+}
+
 .forecast-card img {
   width: 60px;
   height: 60px;
