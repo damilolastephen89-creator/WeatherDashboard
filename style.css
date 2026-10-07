@@ -305,6 +305,35 @@ data.list.slice(0, 5).forEach(item => {
   border: none;
 }
 
+   /* Ripple container */
+.forecast-card {
+  position: relative;
+  overflow: hidden; /* ensures ripple stays inside card */
+  cursor: pointer;
+}
+
+/* Ripple element */
+.forecast-card::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+  animation: none;
+}
+
+/* Ripple animation */
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
 #legend {
   display: flex;
   justify-content: space-around;
