@@ -344,6 +344,29 @@ document.querySelectorAll('.legend').forEach(item => {
   });
 });
 
+  // Add ripple effect to forecast cards
+document.addEventListener("click", function(e) {
+  if (e.target.closest(".forecast-card")) {
+    const card = e.target.closest(".forecast-card");
+    const ripple = card.querySelector("::after");
+
+    // Create ripple dynamically
+    const circle = document.createElement("span");
+    circle.classList.add("ripple");
+    const rect = card.getBoundingClientRect();
+    circle.style.left = `${e.clientX - rect.left}px`;
+    circle.style.top = `${e.clientY - rect.top}px`;
+
+    card.appendChild(circle);
+
+    // Trigger animation
+    circle.style.animation = "ripple 0.6s linear";
+    circle.addEventListener("animationend", () => {
+      circle.remove();
+    });
+  }
+});
+
     // Remove ripple after animation
     setTimeout(() => {
       circle.remove();
@@ -838,3 +861,4 @@ loginCard.style.display = "none";
   document.getElementById("themeToggle").addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
 });
+
