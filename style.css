@@ -1072,3 +1072,21 @@ header nav {
 .theme-switch {
   margin-left: auto;
 }
+
+header {
+  position: sticky;   /* keeps it fixed at the top */
+  top: 0;             /* stick to the very top */
+  z-index: 1000;      /* ensures it stays above other elements */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: #4facfe;
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* subtle shadow for depth */
+}
+
+body {
+  margin: 0;
+  padding-top: 70px; /* ensures content doesn’t hide under header */
+}
