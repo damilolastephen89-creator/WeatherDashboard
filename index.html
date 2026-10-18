@@ -139,6 +139,7 @@
 <div id="horizon" class="horizon-mountains"></div>
 
   <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 
 <audio id="refresh-sound" src="chime.mp3" preload="auto"></audio>
@@ -308,6 +309,7 @@
 <!-- Weather detail modal -->
 <div id="weatherModal" class="modal">
   <div class="modal-content">
+    <canvas id="weatherChart"></canvas>
     <span class="close">&times;</span>
     <h2 id="modalCity"></h2>
     <p id="modalDate"></p>
