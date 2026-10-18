@@ -858,6 +858,18 @@ loginCard.style.display = "none";
   });
 }
 
+data.forecast.list.slice(0, 5).forEach((item, index) => {
+  const forecastCard = document.createElement("div");
+  forecastCard.className = "forecast-card";
+  forecastCard.style.animationDelay = `${index * 0.2}s`; // stagger by 0.2s
+  forecastCard.innerHTML = `
+    <p>${new Date(item.dt_txt).toLocaleString()}</p>
+    <p>${item.main.temp}°C</p>
+    <p>${item.weather[0].description}</p>
+  `;
+  forecastContainer.appendChild(forecastCard);
+});
+    
   document.getElementById("themeToggle").addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
 });
