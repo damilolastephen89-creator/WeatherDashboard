@@ -928,6 +928,66 @@ forecastCard.addEventListener("click", () => {
   document.getElementById("modalHumidity").innerText = `Humidity: ${item.main.humidity}%`;
   document.getElementById("modalWind").innerText = `Wind: ${item.wind.speed} m/s`;
   modal.style.display = "block";
+  // Chart initialization
+function createCharts(data) {
+  const labels = data.forecast.list.slice(0, 5).map(f => new Date(f.dt_txt).toLocaleTimeString());
+
+  // Temperature chart
+  new Chart(document.getElementById("tempChart"), {
+    type: "line",
+    data: {
+      labels,
+      datasets: [{
+        label: "Temperature (°C)",
+        data: data.forecast.list.slice(0, 5).map(f => f.main.temp),
+        borderColor: "#4facfe",
+        backgroundColor: "rgba(79,172,254,0.2)",
+        fill: true,
+        tension: 0.3
+      }]
+    }
+  });
+
+  // Humidity chart
+  new Chart(document.getElementById("humidityChart"), {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [{
+        label: "Humidity (%)",
+        data: data.forecast.list.slice(0, 5).map(f => f.main.humidity),
+        backgroundColor: "rgba(0,242,254,0.6)"
+      }]
+    }
+  });
+
+  // Wind speed chart
+  new Chart(document.getElementById("windChart"), {
+    type: "line",
+    data: {
+      labels,
+      datasets: [{
+        label: "Wind Speed (m/s)",
+        data: data.forecast.list.slice(0, 5).map(f => f.wind.speed),
+        borderColor: "#007acc",
+        backgroundColor: "rgba(0,122,204,0.2)",
+        fill: true,
+        tension: 0.3
+      }]
+    }
+  });
+}
+
+// Tab switching
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    document.querySelectorAll("canvas").forEach(c => c.style.display = "none");
+    document.getElementById(btn.dataset.chart).style.display = "block";
+  });
+});
 
   // Build chart data (e.g., next 5 forecasts)
   const labels = data.forecast.list.slice(0, 5).map(f => new Date(f.dt_txt).toLocaleTimeString());
