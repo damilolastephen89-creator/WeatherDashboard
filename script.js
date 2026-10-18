@@ -896,3 +896,43 @@ document.addEventListener("click", function(e) {
     });
   }
 });
+
+const modal = document.getElementById("weatherModal");
+const closeBtn = document.querySelector(".close");
+
+data.forecast.list.slice(0, 5).forEach((item, index) => {
+  const forecastCard = document.createElement("div");
+  forecastCard.className = "forecast-card";
+  forecastCard.style.animationDelay = `${index * 0.2}s`;
+  forecastCard.innerHTML = `
+    <p>${new Date(item.dt_txt).toLocaleString()}</p>
+    <p>${item.main.temp}°C</p>
+    <p>${item.weather[0].description}</p>
+  `;
+
+  // Click event to open modal
+  forecastCard.addEventListener("click", () => {
+    document.getElementById("modalCity").innerText = data.current.name;
+    document.getElementById("modalDate").innerText = new Date(item.dt_txt).toLocaleString();
+    document.getElementById("modalTemp").innerText = `Temperature: ${item.main.temp}°C`;
+    document.getElementById("modalDescription").innerText = `Condition: ${item.weather[0].description}`;
+    document.getElementById("modalHumidity").innerText = `Humidity: ${item.main.humidity}%`;
+    document.getElementById("modalWind").innerText = `Wind: ${item.wind.speed} m/s`;
+    modal.style.display = "block";
+  });
+
+  forecastContainer.appendChild(forecastCard);
+});
+
+// Close modal
+closeBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+// Close when clicking outside modal
+window.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+});
+  
