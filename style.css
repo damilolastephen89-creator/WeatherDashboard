@@ -1324,3 +1324,40 @@ body.dark-mode .forecast-card:hover {
     opacity: 0;
   }
 }
+
+/* Modal background */
+.modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0,0,0,0.6);
+}
+
+/* Modal content box */
+.modal-content {
+  background: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 400px;
+  transition: background 0.6s ease-in-out, color 0.6s ease-in-out;
+}
+
+/* Dark mode modal */
+body.dark-mode .modal-content {
+  background: #1f1f1f;
+  color: #e0e0e0;
+}
+
+/* Close button */
+.close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
