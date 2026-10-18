@@ -70,6 +70,40 @@
 
 <!-- Main dashboard logic -->
 <script src="script.js"></script>
+  <body>
+  <header>
+    <!-- Header content -->
+  </header>
+
+  <main>
+    <!-- Dashboard and forecast cards -->
+  </main>
+
+  <!-- Weather detail modal (paste here) -->
+  <div id="weatherModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modalCity"></h2>
+      <p id="modalDate"></p>
+      <p id="modalTemp"></p>
+      <p id="modalDescription"></p>
+      <p id="modalHumidity"></p>
+      <p id="modalWind"></p>
+
+      <!-- Chart tabs -->
+      <div class="chart-tabs">
+        <button class="tab-btn active" data-chart="tempChart">Temperature</button>
+        <button class="tab-btn" data-chart="humidityChart">Humidity</button>
+        <button class="tab-btn" data-chart="windChart">Wind Speed</button>
+      </div>
+
+      <!-- Chart canvases -->
+      <canvas id="tempChart"></canvas>
+      <canvas id="humidityChart" style="display:none;"></canvas>
+      <canvas id="windChart" style="display:none;"></canvas>
+    </div>
+  </div>
+</body>
 
   <div id="legend">
   <span class="legend cold">❄️ Cold (≤15°C)</span>
