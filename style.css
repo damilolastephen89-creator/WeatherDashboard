@@ -1361,3 +1361,27 @@ body.dark-mode .modal-content {
   font-size: 24px;
   cursor: pointer;
 }
+
+.chart-tabs {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.tab-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background: #4facfe;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.tab-btn.active {
+  background: #00f2fe;
+}
+
+.tab-btn:hover {
+  background: #007acc;
+}
