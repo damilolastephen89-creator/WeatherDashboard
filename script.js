@@ -920,6 +920,56 @@ data.forecast.list.slice(0, 5).forEach((item, index) => {
     document.getElementById("modalWind").innerText = `Wind: ${item.wind.speed} m/s`;
     modal.style.display = "block";
   });
+forecastCard.addEventListener("click", () => {
+  document.getElementById("modalCity").innerText = data.current.name;
+  document.getElementById("modalDate").innerText = new Date(item.dt_txt).toLocaleString();
+  document.getElementById("modalTemp").innerText = `Temperature: ${item.main.temp}°C`;
+  document.getElementById("modalDescription").innerText = `Condition: ${item.weather[0].description}`;
+  document.getElementById("modalHumidity").innerText = `Humidity: ${item.main.humidity}%`;
+  document.getElementById("modalWind").innerText = `Wind: ${item.wind.speed} m/s`;
+  modal.style.display = "block";
+
+  // Build chart data (e.g., next 5 forecasts)
+  const labels = data.forecast.list.slice(0, 5).map(f => new Date(f.dt_txt).toLocaleTimeString());
+  const temps = data.forecast.list.slice(0, 5).map(f => f.main.temp);
+  const humidity = data.forecast.list.slice(0, 5).map(f => f.main.humidity);
+
+  const ctx = document.getElementById("weatherChart").getContext("2d");
+  new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "Temperature (°C)",
+          data: temps,
+          borderColor: "#4facfe",
+          backgroundColor: "rgba(79,172,254,0.2)",
+          fill: true,
+          tension: 0.3
+        },
+        {
+          label: "Humidity (%)",
+          data: humidity,
+          borderColor: "#00f2fe",
+          backgroundColor: "rgba(0,242,254,0.2)",
+          fill: true,
+          tension: 0.3
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { labels: { color: document.body.classList.contains("dark-mode") ? "#e0e0e0" : "#333" } }
+      },
+      scales: {
+        x: { ticks: { color: document.body.classList.contains("dark-mode") ? "#e0e0e0" : "#333" } },
+        y: { ticks: { color: document.body.classList.contains("dark-mode") ? "#e0e0e0" : "#333" } }
+      }
+    }
+  });
+});
 
   forecastContainer.appendChild(forecastCard);
 });
