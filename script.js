@@ -1066,3 +1066,11 @@ window.addEventListener("click", (e) => {
     document.body.classList.remove("modal-open");
   }
 });
+
+  // Close modal with Esc key
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && modal.classList.contains("show")) {
+    modal.classList.remove("show");
+    document.body.classList.remove("modal-open");
+  }
+});
