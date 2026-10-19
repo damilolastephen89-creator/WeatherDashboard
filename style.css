@@ -1407,3 +1407,14 @@ body.dark-mode .modal-content {
 .tab-btn:hover {
   background: #007acc;
 }
+
+/* Blur effect on background when modal is active */
+body.modal-open {
+  overflow: hidden; /* prevent scrolling behind modal */
+}
+
+body.modal-open main,
+body.modal-open header {
+  filter: blur(6px);
+  transition: filter 0.4s ease;
+}
