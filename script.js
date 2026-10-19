@@ -1046,3 +1046,23 @@ window.addEventListener("click", (e) => {
   }
 });
   
+// Open modal
+forecastCard.addEventListener("click", () => {
+  // Fill modal content...
+  modal.classList.add("show");
+  document.body.classList.add("modal-open");
+});
+
+// Close modal
+closeBtn.addEventListener("click", () => {
+  modal.classList.remove("show");
+  document.body.classList.remove("modal-open");
+});
+
+// Close when clicking outside modal
+window.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.classList.remove("show");
+    document.body.classList.remove("modal-open");
+  }
+});
