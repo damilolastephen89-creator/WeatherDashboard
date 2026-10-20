@@ -1074,3 +1074,39 @@ window.addEventListener("keydown", (e) => {
     document.body.classList.remove("modal-open");
   }
 });
+
+  function trapFocus(modal) {
+  const focusableSelectors = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+  const focusableElements = modal.querySelectorAll(focusableSelectors);
+  const firstElement = focusableElements[0];
+  const lastElement = focusableElements[focusableElements.length - 1];
+
+  modal.addEventListener("keydown", (e) => {
+    if (e.key === "Tab") {
+      if (e.shiftKey) {
+        // Shift + Tab
+        if (document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus();
+        }
+      } else {
+        // Tab
+        if (document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus();
+        }
+      }
+    }
+  });
+}
+
+  forecastCard.addEventListener("click", () => {
+  modal.classList.add("show");
+  document.body.classList.add("modal-open");
+
+  // Trap focus inside modal
+  trapFocus(modal);
+
+  // Move focus to close button initially
+  closeBtn.focus();
+});
