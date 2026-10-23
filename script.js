@@ -344,16 +344,17 @@ document.querySelectorAll('.legend').forEach(item => {
   });
 });
 
-  // Add ripple effect to forecast cards
+// Add ripple effect to forecast cards
 document.addEventListener("click", function(e) {
   if (e.target.closest(".forecast-card")) {
     const card = e.target.closest(".forecast-card");
-    const ripple = card.querySelector("::after");
 
     // Create ripple dynamically
     const circle = document.createElement("span");
     circle.classList.add("ripple");
+
     const rect = card.getBoundingClientRect();
+
     circle.style.left = `${e.clientX - rect.left}px`;
     circle.style.top = `${e.clientY - rect.top}px`;
 
@@ -361,17 +362,16 @@ document.addEventListener("click", function(e) {
 
     // Trigger animation
     circle.style.animation = "ripple 0.6s linear";
+
     circle.addEventListener("animationend", () => {
       circle.remove();
     });
-  }
-});
 
-    // Remove ripple after animation
+    // Backup cleanup
     setTimeout(() => {
       circle.remove();
     }, 600);
-  });
+  }
 });
 
 // Preload sound
@@ -386,6 +386,32 @@ document.getElementById('soundSwitch').addEventListener('change', function() {
 // Ripple + sound effect
 document.querySelectorAll('.legend').forEach(item => {
   item.addEventListener('click', function(e) {
+
+    // Ripple effect
+    const circle = document.createElement('span');
+    const diameter = Math.max(this.clientWidth, this.clientHeight);
+    const radius = diameter / 2;
+
+    circle.style.width = circle.style.height = `${diameter}px`;
+    circle.style.left = `${e.clientX - this.offsetLeft - radius}px`;
+    circle.style.top = `${e.clientY - this.offsetTop - radius}px`;
+
+    circle.classList.add('ripple');
+
+    const oldRipple = this.querySelector('.ripple');
+    if (oldRipple) {
+      oldRipple.remove();
+    }
+
+    this.appendChild(circle);
+
+    // Sound effect
+    if (soundEnabled) {
+      clickSound.currentTime = 0;
+      clickSound.play().catch(() => {});
+    }
+  });
+});
     // Ripple effect
     const circle = document.createElement('span');
     circle.classList.add('ripple');
