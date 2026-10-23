@@ -3,7 +3,9 @@ async function getWeather(city) {
   try {
     const response = await fetch(`/api/weather?city=${city}`);
     const data = await response.json();
-    console.log("Weather data:", data); // test output
+
+    console.log("Weather data:", data);
+
     return data;
   } catch (error) {
     console.error("Error fetching weather:", error);
@@ -13,26 +15,30 @@ async function getWeather(city) {
 // Hook into your search button
 document.querySelector("#searchBtn").addEventListener("click", () => {
   const city = document.querySelector("#cityInput").value;
+
   getWeather(city).then(data => {
     if (data) {
-      // Update city name
-      document.querySelector("#cityName").textContent = data.city.name;
+      document.querySelector("#cityName").textContent =
+        data.city.name;
 
-      // Update current temperature
-      document.querySelector("#temperature").textContent =
-        data.list[0].main.temp + "°C";
-
-// Optional: load default city on page load
-window.addEventListener("DOMContentLoaded", () => {
-  getWeather("Lagos").then(data => {
-    if (data) {
-      document.querySelector("#cityName").textContent = data.city.name;
       document.querySelector("#temperature").textContent =
         data.list[0].main.temp + "°C";
     }
   });
 });
 
+// Optional: load default city on page load
+window.addEventListener("DOMContentLoaded", () => {
+  getWeather("Lagos").then(data => {
+    if (data) {
+      document.querySelector("#cityName").textContent =
+        data.city.name;
+
+      document.querySelector("#temperature").textContent =
+        data.list[0].main.temp + "°C";
+    }
+  });
+});
 
 /* ===========================
    Parallax with Inertia
