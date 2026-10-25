@@ -170,8 +170,10 @@ document.getElementById("searchBtn").addEventListener("click", () => {
   }
 });
 
-async function getWeather(city) {
-  try {
+function fetchWeather() {
+  const city = document.querySelector("#cityInput").value;
+  getWeather(city);
+}
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
     );
