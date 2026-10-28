@@ -142,41 +142,20 @@ function showToast(message, type = "info", persistent = false) {
   closeBtn.className = "toast-close";
   closeBtn.addEventListener("click", () => toast.remove());
 
-  // Progress bar
-  const progress = document.createElement("div");
-  progress.className = "toast-progress";
-
-  toast.appendChild(content);
-  toast.appendChild(closeBtn);
-  toast.appendChild(progress);
-  container.appendChild(toast);
-
-  // Auto remove if not persistent
-  if (!persistent) {
-    let duration = 4000; // 4 seconds
-    progress.style.animation = `progressBar ${duration}ms linear forwards`;
-
-    setTimeout(() => {
-      if (toast.parentNode) toast.remove();
-    }, duration);
-  }
-}
-
-document.getElementById("searchBtn").addEventListener("click", () => {
+document.getElementById(addEventListener("click", () => {
   const city = document.getElementById("cityInput").value;
+
   if (city) {
-    getWeather(city);
-    getForecast(city);
+    fetchWeather(city);
   }
 });
 
-function fetchWeather() {
-  const city = document.querySelector("#cityInput").value;
-  getWeather(city);
-}
+async function fetchWeather(city) {
+  try {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
     );
+
     const data = await response.json();
 
     if (data.cod === 200) {
@@ -187,10 +166,14 @@ function fetchWeather() {
         <p>💨 Wind Speed: ${data.wind.speed} m/s</p>
       `;
     } else {
-      document.getElementById("forecast").innerHTML = `<p>City not found!</p>`;
+      document.getElementById("forecast").innerHTML =
+        `<p>City not found!</p>`;
     }
   } catch (error) {
-    document.getElementById("forecast").innerHTML = `<p>Error fetching data.</p>`;
+    document.getElementById("forecast").innerHTML =
+      `<p>Error fetching data.</p>`;
+
+    console.error(error);
   }
 }
 
@@ -846,7 +829,7 @@ fetch("http://localhost:4000/verify-token", {
 function initMicrosoftAuth() {
   const msalConfig = {
     auth: {
-      clientId: "795b3c76-4e95-46da-86a8-e6978c35b756",
+      clientId: "9720e046-5a73-4da2-a6e3-1f10714b41d9",
       authority: "https://login.microsoftonline.com/27869747-32c9-443f-9917-4bdca06881bf",
       redirectUri: "https://weather-dashboard-omega-peach.vercel.app/auth/microsoft/callback"
     }
