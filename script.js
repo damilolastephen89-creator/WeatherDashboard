@@ -2,7 +2,7 @@
 // WEATHER DASHBOARD SCRIPT
 // ================================
 
-const apiKey = "YOUR_OPENWEATHER_API_KEY";
+const apiKey = "B8a1c4525cae2bd095742c501c0e27b2";
 
 // ================================
 // WEATHER
